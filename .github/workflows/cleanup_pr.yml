@@ -7,6 +7,7 @@ on:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
+    if: secrets.buildJabRefPrivateKey
 
     steps:
     - name: Extract branch name

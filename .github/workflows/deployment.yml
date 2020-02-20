@@ -39,6 +39,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     name: Create installer and portable version for ${{ matrix.displayName }}
+    if: secrets.SNAPCRAFT_LOGIN_FILE
 
     steps:
       - name: Checkout source
