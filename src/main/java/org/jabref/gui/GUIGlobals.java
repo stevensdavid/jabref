@@ -5,6 +5,7 @@ import javafx.scene.text.Font;
 
 import org.jabref.Globals;
 import org.jabref.gui.icon.IconTheme;
+import org.jabref.gui.keyboard.EmacsKeyBindings;
 import org.jabref.gui.util.CustomLocalDragboard;
 import org.jabref.logic.l10n.Localization;
 import org.jabref.preferences.JabRefPreferences;
@@ -40,6 +41,9 @@ public class GUIGlobals {
      * on Un*x is unavailable.
      */
     public static void init() {
+        if (Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS)) {
+            EmacsKeyBindings.load();
+        }
         // Set up entry editor colors, first time:
         GUIGlobals.updateEntryEditorColors();
 
