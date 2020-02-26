@@ -95,7 +95,7 @@ public class JabRefGUI {
 
         //KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (scene.focusOwnerProperty().get() instanceof TextField) {
+            if (Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS) && scene.focusOwnerProperty().get() instanceof TextField) {
                 KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
                 TextField focusedTextField = (TextField) scene.focusOwnerProperty().get();
                 Optional<KeyBinding> keyBinding = keyBindingRepository.mapToKeyBinding(event);
