@@ -4,15 +4,15 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.application.Platform;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 
 import org.jabref.gui.BasePanel;
 import org.jabref.gui.GUIGlobals;
