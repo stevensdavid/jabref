@@ -35,6 +35,7 @@ public class EntryEditorTabViewModel implements PreferenceTabViewModel {
     private final BooleanProperty enableEmacsKeyBindingsProperty = new SimpleBooleanProperty();
     private final BooleanProperty enableEmacsRebindCAProperty = new SimpleBooleanProperty();
     private final BooleanProperty enableEmacsRebindCFProperty = new SimpleBooleanProperty();
+    private final BooleanProperty enableEmacsRebindCNProperty = new SimpleBooleanProperty();
 
     private AutoCompletePreferences autoCompletePreferences;
 
@@ -58,6 +59,7 @@ public class EntryEditorTabViewModel implements PreferenceTabViewModel {
         enableEmacsKeyBindingsProperty.setValue(preferences.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS));
         enableEmacsRebindCAProperty.setValue(preferences.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA));
         enableEmacsRebindCFProperty.setValue(preferences.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CF));
+        enableEmacsRebindCNProperty.setValue(preferences.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CN));
         enableAutoCompleteProperty.setValue(autoCompletePreferences.shouldAutoComplete());
         autoCompleteFieldsProperty.setValue(autoCompletePreferences.getCompleteNamesAsString());
 
@@ -93,6 +95,7 @@ public class EntryEditorTabViewModel implements PreferenceTabViewModel {
         preferences.putBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS, enableEmacsKeyBindingsProperty.getValue());
         preferences.putBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA, enableEmacsRebindCAProperty.getValue());
         preferences.putBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CF, enableEmacsRebindCFProperty.getValue());
+        preferences.putBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CN, enableEmacsRebindCNProperty.getValue());
 
         autoCompletePreferences.setShouldAutoComplete(enableAutoCompleteProperty.getValue());
         autoCompletePreferences.setCompleteNames(autoCompleteFieldsProperty.getValue());
@@ -163,5 +166,7 @@ public class EntryEditorTabViewModel implements PreferenceTabViewModel {
     public BooleanProperty enableEmacsRebindCAProperty() { return enableEmacsRebindCAProperty; }
 
     public BooleanProperty enableEmacsRebindCFProperty() { return enableEmacsRebindCFProperty; }
+
+    public BooleanProperty enableEmacsRebindCNProperty() { return enableEmacsRebindCNProperty; }
 }
 
