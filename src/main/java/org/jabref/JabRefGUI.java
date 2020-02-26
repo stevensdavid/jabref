@@ -4,15 +4,15 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 import org.jabref.gui.BasePanel;
 import org.jabref.gui.GUIGlobals;
@@ -22,6 +22,8 @@ import org.jabref.gui.help.VersionWorker;
 import org.jabref.gui.icon.IconTheme;
 import org.jabref.gui.importer.ParserResultWarningDialog;
 import org.jabref.gui.importer.actions.OpenDatabaseAction;
+import org.jabref.gui.keyboard.KeyBinding;
+import org.jabref.gui.keyboard.KeyBindingRepository;
 import org.jabref.gui.shared.SharedDatabaseUIManager;
 import org.jabref.logic.autosaveandbackup.BackupManager;
 import org.jabref.logic.importer.OpenDatabase;
@@ -31,8 +33,6 @@ import org.jabref.logic.shared.exception.InvalidDBMSConnectionPropertiesExceptio
 import org.jabref.logic.shared.exception.NotASharedDatabaseException;
 import org.jabref.model.database.shared.DatabaseNotSupportedException;
 import org.jabref.preferences.JabRefPreferences;
-import org.jabref.gui.keyboard.KeyBindingRepository;
-import org.jabref.gui.keyboard.KeyBinding;
 
 import impl.org.controlsfx.skin.DecorationPane;
 import org.slf4j.Logger;
