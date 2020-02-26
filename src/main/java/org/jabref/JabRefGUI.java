@@ -99,6 +99,8 @@ public class JabRefGUI {
                 KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
                 TextField focusedTextField = (TextField) scene.focusOwnerProperty().get();
                 Optional<KeyBinding> keyBinding = keyBindingRepository.mapToKeyBinding(event);
+                boolean CAFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA);
+                boolean CFFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CF);
                 if (keyBinding.isPresent()) {
                     if (keyBinding.get().equals(KeyBinding.EMACS_DELETE)) {
                         focusedTextField.deletePreviousChar();
@@ -108,11 +110,11 @@ public class JabRefGUI {
                         focusedTextField.backward();
                         event.consume();
                     }
-                    else if (keyBinding.get().equals(KeyBinding.EMACS_FORWARD)) {
+                    else if (CFFlag && keyBinding.get().equals(KeyBinding.EMACS_FORWARD)) {
                         focusedTextField.forward();
                         event.consume();
                     }
-                    else if (keyBinding.get().equals(KeyBinding.EMACS_BEGINNING)) {
+                    else if (CAFlag && keyBinding.get().equals(KeyBinding.EMACS_BEGINNING)) {
                         focusedTextField.home();
                         event.consume();
                     }
