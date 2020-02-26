@@ -23,6 +23,7 @@ public class EntryEditorTabView extends AbstractPreferenceTabView<EntryEditorTab
     @FXML private CheckBox enableEmacsRebindCA;
     @FXML private CheckBox enableEmacsRebindCF;
     @FXML private CheckBox enableEmacsRebindCN;
+    @FXML private CheckBox enableEmacsRebindAU;
     @FXML private TextField autoCompleteFields;
     @FXML private RadioButton autoCompleteFirstLast;
     @FXML private RadioButton autoCompleteLastFirst;
@@ -56,6 +57,7 @@ public class EntryEditorTabView extends AbstractPreferenceTabView<EntryEditorTab
         enableEmacsRebindCA.selectedProperty().bindBidirectional(viewModel.enableEmacsRebindCAProperty());
         enableEmacsRebindCF.selectedProperty().bindBidirectional(viewModel.enableEmacsRebindCFProperty());
         enableEmacsRebindCN.selectedProperty().bindBidirectional(viewModel.enableEmacsRebindCNProperty());
+        enableEmacsRebindAU.selectedProperty().bindBidirectional(viewModel.enableEmacsRebindAUProperty());
         autoCompleteFields.textProperty().bindBidirectional(viewModel.autoCompleteFieldsProperty());
         autoCompleteFirstLast.selectedProperty().bindBidirectional(viewModel.autoCompleteFirstLastProperty());
         autoCompleteLastFirst.selectedProperty().bindBidirectional(viewModel.autoCompleteLastFirstProperty());

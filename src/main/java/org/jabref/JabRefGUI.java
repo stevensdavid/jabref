@@ -102,6 +102,7 @@ public class JabRefGUI {
                 boolean CAFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA);
                 boolean CFFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CF);
                 boolean CNFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CN);
+                boolean AUFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_AU);
                 if (keyBinding.isPresent()) {
                     if (keyBinding.get().equals(KeyBinding.EMACS_DELETE)) {
                         focusedTextField.deletePreviousChar();
@@ -135,7 +136,7 @@ public class JabRefGUI {
                         focusedTextField.home();
                         event.consume();
                     }
-                    else if (keyBinding.get().equals(KeyBinding.EMACS_DOWN)) {
+                    else if (CNFlag && keyBinding.get().equals(KeyBinding.EMACS_DOWN)) {
                         focusedTextField.end();
                         event.consume();
                     }
@@ -149,7 +150,58 @@ public class JabRefGUI {
                         }
                         event.consume();
                     }
-
+                    else if (keyBinding.get().equals(KeyBinding.EMACS_DOWNCASE)) {
+                        int pos = focusedTextField.getCaretPosition();
+                        String text = focusedTextField.getText(0, focusedTextField.getText().length());
+                        String[] splitText = text.split("\\s+");
+                        int numOfSpace = 0;
+                        for (int i = 0; i < pos - 1; ++i) {
+                            if(text.charAt(i) == ' ') {
+                                numOfSpace++;
+                            }
+                        }
+                        if(pos == 0) {
+                            numOfSpace = -1;
+                        }
+                        String res = "";
+                        for (int i = 0; i < splitText.length; ++i) {
+                            if (i == numOfSpace + 1) {
+                                res += splitText[i].toLowerCase();
+                            } else {
+                                res += splitText[i];
+                            }
+                            res += " ";
+                        }
+                        focusedTextField.setText(res);
+                        focusedTextField.positionCaret(pos);
+                        event.consume();
+                    }
+                    else if (AUFlag && keyBinding.get().equals(KeyBinding.EMACS_UPCASE)) {
+                        int pos = focusedTextField.getCaretPosition();
+                        String text = focusedTextField.getText(0, focusedTextField.getText().length());
+                        String[] splitText = text.split("\\s+");
+                        int numOfSpace = 0;
+                        for (int i = 0; i < pos - 1; ++i) {
+                            if(text.charAt(i) == ' ') {
+                                numOfSpace++;
+                            }
+                        }
+                        if(pos == 0) {
+                            numOfSpace = -1;
+                        }
+                        String res = "";
+                        for (int i = 0; i < splitText.length; ++i) {
+                            if (i == numOfSpace + 1) {
+                                res += splitText[i].toUpperCase();
+                            } else {
+                                res += splitText[i];
+                            }
+                            res += " ";
+                        }
+                        focusedTextField.setText(res);
+                        focusedTextField.positionCaret(pos);
+                        event.consume();
+                    }
                 }
             }
         });

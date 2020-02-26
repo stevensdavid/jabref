@@ -14,7 +14,8 @@ public enum KeyBinding {
     EMACS_UP("Emacs move caret up", Localization.lang("Move the caret up"), "ctrl+P", KeyBindingCategory.EDIT),
     EMACS_DOWN("Emacs move caret down", Localization.lang("Move the caret down"), "ctrl+N", KeyBindingCategory.EDIT),
     EMACS_CAPITALIZE("Emacs capitalize next word", Localization.lang("Capitalize the next word"), "alt+C", KeyBindingCategory.EDIT),
-
+    EMACS_DOWNCASE("Emacs downcase next word", Localization.lang("Make all characters in the next word downcase"), "alt+L", KeyBindingCategory.EDIT),
+    EMACS_UPCASE("Emacs uppercase next word", Localization.lang("Make all characters in the next word uppercase"), "alt+U", KeyBindingCategory.EDIT),
 
     ABBREVIATE("Abbreviate", Localization.lang("Abbreviate journal names"), "ctrl+alt+A", KeyBindingCategory.TOOLS),
     AUTOGENERATE_BIBTEX_KEYS("Autogenerate BibTeX keys", Localization.lang("Autogenerate BibTeX keys"), "ctrl+G", KeyBindingCategory.QUALITY),
@@ -59,7 +60,7 @@ public enum KeyBinding {
     DEFAULT_TABLE_FONT_SIZE("Default table font size", Localization.lang("Default table font size"), "ctrl+0", KeyBindingCategory.VIEW),
     NEW_ARTICLE("New article", Localization.lang("New article"), "ctrl+shift+A", KeyBindingCategory.BIBTEX),
     NEW_BOOK("New book", Localization.lang("New book"), "ctrl+shift+B", KeyBindingCategory.BIBTEX),
-    NEW_ENTRY("New entry", Localization.lang("New entry"), "ctrl+N", KeyBindingCategory.BIBTEX),
+    NEW_ENTRY("New entry", Localization.lang("New entry"), "ctrl+9", KeyBindingCategory.BIBTEX),
     NEW_ENTRY_FROM_PLAIN_TEXT("New entry from plain text", Localization.lang("New entry from plain text"), "ctrl+shift+N", KeyBindingCategory.BIBTEX),
     NEW_INBOOK("New inbook", Localization.lang("New inbook"), "ctrl+shift+I", KeyBindingCategory.BIBTEX),
     NEW_MASTERSTHESIS("New mastersthesis", Localization.lang("New mastersthesis"), "ctrl+shift+M", KeyBindingCategory.BIBTEX),
@@ -93,7 +94,7 @@ public enum KeyBinding {
     SELECT_ALL("Select all", Localization.lang("Select all"), "ctrl+B", KeyBindingCategory.EDIT),
     SELECT_FIRST_ENTRY("Select first entry", Localization.lang("Select first entry"), "HOME", KeyBindingCategory.EDIT),
     SELECT_LAST_ENTRY("Select last entry", Localization.lang("Select last entry"), "END", KeyBindingCategory.EDIT),
-    STRING_DIALOG_ADD_STRING("String dialog, add string", Localization.lang("String dialog, add string"), "ctrl+N", KeyBindingCategory.FILE),
+    STRING_DIALOG_ADD_STRING("String dialog, add string", Localization.lang("String dialog, add string"), "ctrl+alt+N", KeyBindingCategory.FILE),
     STRING_DIALOG_REMOVE_STRING("String dialog, remove string", Localization.lang("String dialog, remove string"), "shift+DELETE", KeyBindingCategory.FILE),
     SYNCHRONIZE_FILES("Synchronize files", Localization.lang("Synchronize files"), "ctrl+shift+F7", KeyBindingCategory.QUALITY),
     TOGGLE_GROUPS_INTERFACE("Toggle groups interface", Localization.lang("Toggle groups interface"), "alt+3", KeyBindingCategory.VIEW),
