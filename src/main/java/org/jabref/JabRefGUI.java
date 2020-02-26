@@ -156,11 +156,11 @@ public class JabRefGUI {
                         String[] splitText = text.split("\\s+");
                         int numOfSpace = 0;
                         for (int i = 0; i < pos - 1; ++i) {
-                            if(text.charAt(i) == ' ') {
+                            if (text.charAt(i) == ' ') {
                                 numOfSpace++;
                             }
                         }
-                        if(pos == 0) {
+                        if (pos == 0) {
                             numOfSpace = -1;
                         }
                         String res = "";
@@ -182,11 +182,11 @@ public class JabRefGUI {
                         String[] splitText = text.split("\\s+");
                         int numOfSpace = 0;
                         for (int i = 0; i < pos - 1; ++i) {
-                            if(text.charAt(i) == ' ') {
+                            if (text.charAt(i) == ' ') {
                                 numOfSpace++;
                             }
                         }
-                        if(pos == 0) {
+                        if (pos == 0) {
                             numOfSpace = -1;
                         }
                         String res = "";
