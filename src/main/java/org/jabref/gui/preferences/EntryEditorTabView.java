@@ -19,6 +19,9 @@ public class EntryEditorTabView extends AbstractPreferenceTabView<EntryEditorTab
     @FXML private CheckBox enableLatexCitationsTab;
     @FXML private CheckBox enableValidation;
     @FXML private CheckBox enableAutoComplete;
+    @FXML private CheckBox enableEmacsKeyBindings;
+    @FXML private CheckBox enableEmacsRebindCA;
+    @FXML private CheckBox enableEmacsRebindCF;
     @FXML private TextField autoCompleteFields;
     @FXML private RadioButton autoCompleteFirstLast;
     @FXML private RadioButton autoCompleteLastFirst;
@@ -48,6 +51,9 @@ public class EntryEditorTabView extends AbstractPreferenceTabView<EntryEditorTab
         enableLatexCitationsTab.selectedProperty().bindBidirectional(viewModel.enableLatexCitationsTabProperty());
         enableValidation.selectedProperty().bindBidirectional(viewModel.enableValidationProperty());
         enableAutoComplete.selectedProperty().bindBidirectional(viewModel.enableAutoCompleteProperty());
+        enableEmacsKeyBindings.selectedProperty().bindBidirectional(viewModel.enableEmacsKeyBindingsProperty());
+        enableEmacsRebindCA.selectedProperty().bindBidirectional(viewModel.enableEmacsRebindCAProperty());
+        enableEmacsRebindCF.selectedProperty().bindBidirectional(viewModel.enableEmacsRebindCFProperty());
         autoCompleteFields.textProperty().bindBidirectional(viewModel.autoCompleteFieldsProperty());
         autoCompleteFirstLast.selectedProperty().bindBidirectional(viewModel.autoCompleteFirstLastProperty());
         autoCompleteLastFirst.selectedProperty().bindBidirectional(viewModel.autoCompleteLastFirstProperty());
