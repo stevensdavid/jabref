@@ -8,9 +8,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -101,6 +101,7 @@ public class JabRefGUI {
                 Optional<KeyBinding> keyBinding = keyBindingRepository.mapToKeyBinding(event);
                 boolean CAFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA);
                 boolean CFFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CF);
+                boolean CNFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CN);
                 if (keyBinding.isPresent()) {
                     if (keyBinding.get().equals(KeyBinding.EMACS_DELETE)) {
                         focusedTextField.deletePreviousChar();
@@ -122,6 +123,33 @@ public class JabRefGUI {
                         focusedTextField.end();
                         event.consume();
                     }
+                    else if (keyBinding.get().equals(KeyBinding.EMACS_BEGINNING_DOC)) {
+                        focusedTextField.home();
+                        event.consume();
+                    }
+                    else if (keyBinding.get().equals(KeyBinding.EMACS_END_DOC)) {
+                        focusedTextField.end();
+                        event.consume();
+                    }
+                    else if (keyBinding.get().equals(KeyBinding.EMACS_UP)) {
+                        focusedTextField.home();
+                        event.consume();
+                    }
+                    else if (keyBinding.get().equals(KeyBinding.EMACS_DOWN)) {
+                        focusedTextField.end();
+                        event.consume();
+                    }
+                    else if (keyBinding.get().equals(KeyBinding.EMACS_CAPITALIZE)) {
+                        int pos = focusedTextField.getCaretPosition();
+                        if (pos < focusedTextField.getText().length()) {
+                            focusedTextField.setText(focusedTextField.getText(0, pos) 
+                            + Character.toUpperCase(focusedTextField.getText(pos, pos + 1).charAt(0)) 
+                            + focusedTextField.getText(pos + 1, focusedTextField.getText().length()));
+                            focusedTextField.positionCaret(pos);
+                        }
+                        event.consume();
+                    }
+
                 }
             }
         });
