@@ -4,6 +4,12 @@ import org.jabref.logic.l10n.Localization;
 
 public enum KeyBinding {
 
+    EMACS_DELETE("Emacs delete", Localization.lang("Delete text"), "ctrl+D", KeyBindingCategory.EDIT),
+    EMACS_BACKWARD("Emacs move caret left", Localization.lang("Move caret left"), "ctrl+B", KeyBindingCategory.EDIT),
+    EMACS_FORWARD("Emacs move caret right", Localization.lang("Move caret right"), "ctrl+F", KeyBindingCategory.EDIT),
+    EMACS_BEGINNING("Emacs move caret to beginning", Localization.lang("Move caret to beginning"), "ctrl+A", KeyBindingCategory.EDIT),
+    EMACS_END("Emacs move caret to end", Localization.lang("Move caret to end"), "ctrl+E", KeyBindingCategory.EDIT),
+
     ABBREVIATE("Abbreviate", Localization.lang("Abbreviate journal names"), "ctrl+alt+A", KeyBindingCategory.TOOLS),
     AUTOGENERATE_BIBTEX_KEYS("Autogenerate BibTeX keys", Localization.lang("Autogenerate BibTeX keys"), "ctrl+G", KeyBindingCategory.QUALITY),
     ACCEPT("Accept", Localization.lang("Accept"), "ctrl+ENTER", KeyBindingCategory.EDIT),
@@ -78,7 +84,7 @@ public enum KeyBinding {
     SAVE_DATABASE("Save library", Localization.lang("Save library"), "ctrl+S", KeyBindingCategory.FILE),
     SAVE_DATABASE_AS("Save library as ...", Localization.lang("Save library as..."), "ctrl+shift+S", KeyBindingCategory.FILE),
     SEARCH("Search", Localization.lang("Search"), "ctrl+F", KeyBindingCategory.SEARCH),
-    SELECT_ALL("Select all", Localization.lang("Select all"), "ctrl+A", KeyBindingCategory.EDIT),
+    SELECT_ALL("Select all", Localization.lang("Select all"), "ctrl+B", KeyBindingCategory.EDIT),
     SELECT_FIRST_ENTRY("Select first entry", Localization.lang("Select first entry"), "HOME", KeyBindingCategory.EDIT),
     SELECT_LAST_ENTRY("Select last entry", Localization.lang("Select last entry"), "END", KeyBindingCategory.EDIT),
     STRING_DIALOG_ADD_STRING("String dialog, add string", Localization.lang("String dialog, add string"), "ctrl+N", KeyBindingCategory.FILE),
