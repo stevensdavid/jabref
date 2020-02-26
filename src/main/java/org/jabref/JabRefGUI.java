@@ -8,9 +8,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javafx.application.Platform;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -142,8 +142,8 @@ public class JabRefGUI {
                     else if (keyBinding.get().equals(KeyBinding.EMACS_CAPITALIZE)) {
                         int pos = focusedTextField.getCaretPosition();
                         if (pos < focusedTextField.getText().length()) {
-                            focusedTextField.setText(focusedTextField.getText(0, pos) 
-                            + Character.toUpperCase(focusedTextField.getText(pos, pos + 1).charAt(0)) 
+                            focusedTextField.setText(focusedTextField.getText(0, pos)
+                            + Character.toUpperCase(focusedTextField.getText(pos, pos + 1).charAt(0))
                             + focusedTextField.getText(pos + 1, focusedTextField.getText().length()));
                             focusedTextField.positionCaret(pos);
                         }

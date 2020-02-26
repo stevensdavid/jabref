@@ -13,7 +13,7 @@ public enum KeyBinding {
     EMACS_END_DOC("Emacs move caret to end of the document", Localization.lang("Move the caret to the end of the document"), "alt+shift+LESS", KeyBindingCategory.EDIT),
     EMACS_UP("Emacs move caret up", Localization.lang("Move the caret up"), "ctrl+P", KeyBindingCategory.EDIT),
     EMACS_DOWN("Emacs move caret down", Localization.lang("Move the caret down"), "ctrl+N", KeyBindingCategory.EDIT),
-    EMACS_CAPITALIZE("Emacs capitalize next word", Localization.lang("Capitaliza the next word"), "alt+C", KeyBindingCategory.EDIT),
+    EMACS_CAPITALIZE("Emacs capitalize next word", Localization.lang("Capitalize the next word"), "alt+C", KeyBindingCategory.EDIT),
 
 
     ABBREVIATE("Abbreviate", Localization.lang("Abbreviate journal names"), "ctrl+alt+A", KeyBindingCategory.TOOLS),
