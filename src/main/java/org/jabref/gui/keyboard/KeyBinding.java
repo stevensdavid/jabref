@@ -84,7 +84,7 @@ public enum KeyBinding {
     SAVE_DATABASE("Save library", Localization.lang("Save library"), "ctrl+S", KeyBindingCategory.FILE),
     SAVE_DATABASE_AS("Save library as ...", Localization.lang("Save library as..."), "ctrl+shift+S", KeyBindingCategory.FILE),
     SEARCH("Search", Localization.lang("Search"), "ctrl+F", KeyBindingCategory.SEARCH),
-    SELECT_ALL("Select all", Localization.lang("Select all"), "ctrl+B", KeyBindingCategory.EDIT),
+    SELECT_ALL("Select all", Localization.lang("Select all"), "ctrl+A", KeyBindingCategory.EDIT),
     SELECT_FIRST_ENTRY("Select first entry", Localization.lang("Select first entry"), "HOME", KeyBindingCategory.EDIT),
     SELECT_LAST_ENTRY("Select last entry", Localization.lang("Select last entry"), "END", KeyBindingCategory.EDIT),
     STRING_DIALOG_ADD_STRING("String dialog, add string", Localization.lang("String dialog, add string"), "ctrl+N", KeyBindingCategory.FILE),

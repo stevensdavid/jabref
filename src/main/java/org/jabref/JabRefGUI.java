@@ -5,13 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.Optional;
+//import java.util.Optional;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
+//import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 import org.jabref.gui.BasePanel;
@@ -32,7 +32,8 @@ import org.jabref.logic.shared.exception.NotASharedDatabaseException;
 import org.jabref.model.database.shared.DatabaseNotSupportedException;
 import org.jabref.preferences.JabRefPreferences;
 import org.jabref.gui.keyboard.KeyBindingRepository;
-import org.jabref.gui.keyboard.KeyBinding;
+//import org.jabref.gui.keyboard.KeyBinding;
+import org.jabref.gui.keyboard.EmacsKeyBindings2;
 
 import impl.org.controlsfx.skin.DecorationPane;
 import org.slf4j.Logger;
@@ -93,37 +94,12 @@ public class JabRefGUI {
 
         Scene scene = new Scene(root, 800, 800);
 
-        //KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS) && scene.focusOwnerProperty().get() instanceof TextField) {
-                KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
-                TextField focusedTextField = (TextField) scene.focusOwnerProperty().get();
-                Optional<KeyBinding> keyBinding = keyBindingRepository.mapToKeyBinding(event);
-                boolean CAFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA);
-                boolean CFFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CF);
-                if (keyBinding.isPresent()) {
-                    if (keyBinding.get().equals(KeyBinding.EMACS_DELETE)) {
-                        focusedTextField.deletePreviousChar();
-                        event.consume();
-                    }
-                    else if (keyBinding.get().equals(KeyBinding.EMACS_BACKWARD)) {
-                        focusedTextField.backward();
-                        event.consume();
-                    }
-                    else if (CFFlag && keyBinding.get().equals(KeyBinding.EMACS_FORWARD)) {
-                        focusedTextField.forward();
-                        event.consume();
-                    }
-                    else if (CAFlag && keyBinding.get().equals(KeyBinding.EMACS_BEGINNING)) {
-                        focusedTextField.home();
-                        event.consume();
-                    }
-                    else if (keyBinding.get().equals(KeyBinding.EMACS_END)) {
-                        focusedTextField.end();
-                        event.consume();
-                    }
-                }
-            }
+            boolean EmacsFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS);
+            boolean CAFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA);
+            boolean CFFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CF);
+            KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
+            EmacsKeyBindings2.executeEmac(scene, event, EmacsFlag, CAFlag, CFFlag, keyBindingRepository);
         });
 
         Globals.getThemeLoader().installCss(scene, Globals.prefs);
