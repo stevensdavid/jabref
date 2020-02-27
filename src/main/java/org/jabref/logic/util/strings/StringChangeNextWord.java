@@ -97,7 +97,7 @@ public class StringChangeNextWord {
      * @param text string to analyze
      * @return String the result text
      */
-    public static String getNextWordEmpty(int pos, int numOfSpace, String text) {
+    public static String getNextWordEmpty(int pos, String text) {
         StringBuilder res = new StringBuilder();
         if (text.charAt(pos) == ' ') {
             boolean meetNextSpace = true;
@@ -115,7 +115,7 @@ public class StringChangeNextWord {
                             meetNextSpace = true;
                         }
                     }
-                    if (meetNumWord == 2) {
+                    if (meetNumWord >= 2) {
                         res.append(text.charAt(i));
                     }
                 }
@@ -159,7 +159,6 @@ public class StringChangeNextWord {
      */
     public static String getPreviousWordEmpty(int numOfSpace, String[] splitText) {
         StringBuilder res = new StringBuilder();
-
         for (int i = 0; i < splitText.length; ++i) {
             if (i != numOfSpace) {
                 res.append(splitText[i]);
@@ -222,8 +221,7 @@ public class StringChangeNextWord {
      */
     public static String editNextWordToEmpty(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
-        String res = getNextWordEmpty(pos, numOfSpace, text);
+        String res = getNextWordEmpty(pos, text);
         return res;
     }
 
@@ -236,8 +234,11 @@ public class StringChangeNextWord {
      */
     public static String editPreviousWordToEmpty(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
-        String res = getPreviousWordEmpty(numOfSpace, splitText);
-        return res;
+        StringBuilder reverseText = new StringBuilder(text);
+        reverseText.reverse();
+        String res = getNextWordEmpty(pos, reverseText.toString());
+        StringBuilder resText = new StringBuilder(res);
+        resText.reverse();
+        return resText.toString();
     }
 }
