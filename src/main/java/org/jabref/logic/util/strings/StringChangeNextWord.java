@@ -1,6 +1,11 @@
 package org.jabref.logic.util.strings;
 
 public class StringChangeNextWord {
+    private enum LetterCase {
+        UPPER,
+        LOWER,
+        CAPITALIZED
+    }
 
     /**
      * Get the number of spaces from beginning of line to cursor.
@@ -22,63 +27,23 @@ public class StringChangeNextWord {
         return numOfSpace;
     }
 
-    /**
-     * Get the overall string for capitalizing the next word.
-     *
-     * @param numOfSpace the number of spaces from the beginning to the cursor
-     * @param splitText array of strings to analyze
-     * @return String the result text
-     */
-    public static String getNextWordCapitalize(int numOfSpace, String[] splitText) {
+    private static String setNextWordsCase(int numOfSpace, String[] splitText, LetterCase targetCase) {
         StringBuilder res = new StringBuilder();
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
-                res.append(Character.toUpperCase(splitText[i].charAt(0)));
-                res.append(splitText[i].substring(1));
-            } else {
-                res.append(splitText[i]);
-            }
-            if (i < splitText.length - 1) {
-                res.append(" ");
-            }
-        }
-        return res.toString();
-    }
-
-    /**
-     * Get the overall string for making the next word uppercase.
-     *
-     * @param numOfSpace the number of spaces from the beginning to the cursor
-     * @param splitText array of strings to analyze
-     * @return String the result text
-     */
-    public static String getNextWordUpperCase(int numOfSpace, String[] splitText) {
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < splitText.length; ++i) {
-            if (i == numOfSpace + 1) {
-                res.append(splitText[i].toUpperCase());
-            } else {
-                res.append(splitText[i]);
-            }
-            if (i < splitText.length - 1) {
-                res.append(" ");
-            }
-        }
-        return res.toString();
-    }
-
-    /**
-     * Get the overall string for making the next word lowercase.
-     *
-     * @param numOfSpace the number of spaces from the beginning to the cursor
-     * @param splitText array of strings to analyze
-     * @return String the result text
-     */
-    public static String getNextWordLowerCase(int numOfSpace, String[] splitText) {
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < splitText.length; ++i) {
-            if (i == numOfSpace + 1) {
-                res.append(splitText[i].toLowerCase());
+                switch (targetCase) {
+                    case UPPER:
+                        res.append(splitText[i].toUpperCase());
+                        break;
+                    case LOWER:
+                        res.append(splitText[i].toLowerCase());
+                        break;
+                    case CAPITALIZED:
+                        res.append(Character.toUpperCase(splitText[i].charAt(0)));
+                        // Set remainder of string to lower case
+                        res.append(splitText[i].substring(1).toLowerCase());
+                        break;
+                }
             } else {
                 res.append(splitText[i]);
             }
@@ -180,7 +145,7 @@ public class StringChangeNextWord {
     public static String editNextWordCapitalize(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
-        String res = getNextWordCapitalize(numOfSpace, splitText);
+        String res = setNextWordsCase(numOfSpace, splitText, LetterCase.CAPITALIZED);
         return res;
     }
 
@@ -194,7 +159,7 @@ public class StringChangeNextWord {
     public static String editNextWordUpperCase(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
-        String res = getNextWordUpperCase(numOfSpace, splitText);
+        String res = setNextWordsCase(numOfSpace, splitText, LetterCase.UPPER);
         return res;
     }
 
@@ -208,7 +173,7 @@ public class StringChangeNextWord {
     public static String editNextWordLowerCase(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
-        String res = getNextWordLowerCase(numOfSpace, splitText);
+        String res = setNextWordsCase(numOfSpace, splitText, LetterCase.LOWER);
         return res;
     }
 
