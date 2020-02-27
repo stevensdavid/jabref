@@ -92,19 +92,36 @@ public class StringChangeNextWord {
     /**
      * Get the overall string for making the next word empty.
      *
+     * @param pos the position of the cursor
      * @param numOfSpace the number of spaces from the beginning to the cursor
-     * @param splitText array of strings to analyze
+     * @param text string to analyze
      * @return String the result text
      */
-    public static String getNextWordEmpty(int numOfSpace, String[] splitText) {
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < splitText.length; ++i) {
-            if (i != numOfSpace + 1) {
-                res.append(splitText[i]);
+    public static String getNextWordEmpty(int pos, int numOfSpace, String text) {
+        String[] splitText = text.split("\\s+");
+        String res = "";
+        if (text.charAt(pos) == ' ' || (pos > 0 && text.charAt(pos - 1) == ' ')) {
+            for (int i = 0; i < splitText.length; ++i) {
+                if (i != numOfSpace + 1) {
+                    res += splitText[i];
+                }
+                if (i < splitText.length - 1) {
+                    res += " ";
+                }
             }
-            //Add spaces between each word except the last one
-            if (i < splitText.length - 2) {
-                res.append(" ");
+        } else {
+            int indexSpace = 0;
+            for (int i = 0; i < text.length(); ++i) {
+                if (text.charAt(i) == ' ') {
+                    indexSpace++;
+                }
+                if (i < pos) {
+                    res += text.charAt(i);
+                } else {
+                    if (indexSpace > numOfSpace) {
+                        res += text.charAt(i);
+                    }
+                }
             }
         }
         return res.toString();
@@ -119,6 +136,7 @@ public class StringChangeNextWord {
      */
     public static String getPreviousWordEmpty(int numOfSpace, String[] splitText) {
         StringBuilder res = new StringBuilder();
+
         for (int i = 0; i < splitText.length; ++i) {
             if (i != numOfSpace) {
                 res.append(splitText[i]);
@@ -182,7 +200,7 @@ public class StringChangeNextWord {
     public static String editNextWordToEmpty(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
-        String res = getNextWordEmpty(numOfSpace, splitText);
+        String res = getNextWordEmpty(pos, numOfSpace, text);
         return res;
     }
 
