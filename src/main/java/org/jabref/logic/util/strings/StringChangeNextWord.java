@@ -38,7 +38,9 @@ public class StringChangeNextWord {
             } else {
                 res += splitText[i];
             }
-            res += " ";
+            if(i < splitText.length - 1) {
+                res += " ";
+            }
         }
         return res;
     }
@@ -58,7 +60,9 @@ public class StringChangeNextWord {
             } else {
                 res += splitText[i];
             }
-            res += " ";
+            if(i < splitText.length - 1) {
+                res += " ";
+            }
         }
         return res;
     }
@@ -78,7 +82,9 @@ public class StringChangeNextWord {
             } else {
                 res += splitText[i];
             }
-            res += " ";
+            if(i < splitText.length - 1) {
+                res += " ";
+            }
         }
         return res;
     }
@@ -95,6 +101,28 @@ public class StringChangeNextWord {
         for (int i = 0; i < splitText.length; ++i) {
             if (i != numOfSpace + 1) {
                 res += splitText[i];
+            }
+            if(i < splitText.length - 1) {
+                res += " ";
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Get the overall string for making the previous word empty. 
+     *
+     * @param numOfSpace the number of spaces from the beginning to the cursor
+     * @param splitText array of strings to analyze
+     * @return String the result text
+     */
+    public String getPreviousWordEmpty (int numOfSpace, String[] splitText) {
+        String res = "";
+        for (int i = 0; i < splitText.length; ++i) {
+            if (i != numOfSpace) {
+                res += splitText[i];
+            }
+            if(i < splitText.length - 1) {
                 res += " ";
             }
         }
@@ -154,6 +182,20 @@ public class StringChangeNextWord {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
         String res = getNextWordEmpty(numOfSpace, splitText);
+        return res;
+    }
+
+    /**
+     * Remove the previous word on the left side of the cursor.
+     *
+     * @param pos the position of the cursor
+     * @param text String to analyze
+     * @return String the result text
+     */
+    public String editPreviousWordToEmpty (int pos, String text) {
+        int numOfSpace = getNumOfSpace(pos, text);
+        String[] splitText = text.split("\\s+");
+        String res = getPreviousWordEmpty(numOfSpace, splitText);
         return res;
     }
 }
