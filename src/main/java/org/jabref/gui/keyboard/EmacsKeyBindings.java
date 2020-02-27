@@ -3,16 +3,15 @@ package org.jabref.gui.keyboard;
 import java.util.Optional;
 
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyEvent;
 
 import org.jabref.logic.util.strings.StringChangeNextWord;
 
 public class EmacsKeyBindings {
     public static void executeEmac(Scene scene, KeyEvent event, boolean EmacsFlag, boolean CAFlag, boolean CFFlag, boolean CNFlag, boolean AUFlag, KeyBindingRepository keyBindingRepository) {
-        if (EmacsFlag && scene.focusOwnerProperty().get() instanceof TextField) {
-            //KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
-            TextField focusedTextField = (TextField) scene.focusOwnerProperty().get();
+        if (EmacsFlag && scene.focusOwnerProperty().get() instanceof TextInputControl) {
+            TextInputControl focusedTextField = (TextInputControl) scene.focusOwnerProperty().get();
             Optional<KeyBinding> keyBinding = keyBindingRepository.mapToKeyBinding(event);
             if (keyBinding.isPresent()) {
                 if (keyBinding.get().equals(KeyBinding.EMACS_DELETE)) {
