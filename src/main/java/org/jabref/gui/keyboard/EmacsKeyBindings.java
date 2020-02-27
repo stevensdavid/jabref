@@ -42,12 +42,29 @@ public class EmacsKeyBindings {
                 }
                 else if (keyBinding.get().equals(KeyBinding.EMACS_CAPITALIZE)) {
                     int pos = focusedTextField.getCaretPosition();
-                    if (pos < focusedTextField.getText().length()) {
-                        focusedTextField.setText(focusedTextField.getText(0, pos)
-                        + Character.toUpperCase(focusedTextField.getText(pos, pos + 1).charAt(0))
-                        + focusedTextField.getText(pos + 1, focusedTextField.getText().length()));
-                        focusedTextField.positionCaret(pos);
+                    String text = focusedTextField.getText(0, focusedTextField.getText().length());
+                    String[] splitText = text.split("\\s+");
+                    int numOfSpace = 0;
+                    for (int i = 0; i < pos - 1; ++i) {
+                        if (text.charAt(i) == ' ') {
+                            numOfSpace++;
+                        }
                     }
+                    if (pos == 0) {
+                        numOfSpace = -1;
+                    }
+                    String res = "";
+                    for (int i = 0; i < splitText.length; ++i) {
+                        if (i == numOfSpace + 1) {
+                            res += Character.toUpperCase(splitText[i].charAt(0));
+                            res += splitText[i].substring(1);
+                        } else {
+                            res += splitText[i];
+                        }
+                        res += " ";
+                    }
+                    focusedTextField.setText(res);
+                    focusedTextField.positionCaret(pos);
                 }
                 else if (keyBinding.get().equals(KeyBinding.EMACS_LOWERCASE)) {
                     int pos = focusedTextField.getCaretPosition();
