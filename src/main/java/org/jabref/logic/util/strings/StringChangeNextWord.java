@@ -1,7 +1,6 @@
 package org.jabref.logic.util.strings;
 
 public class StringChangeNextWord {
-
     /**
      * Capitalize the next word on the right side of the cursor. 
      *
