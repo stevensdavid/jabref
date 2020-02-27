@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
+import org.jabref.logic.util.strings.StringChangeNextWord;
+
 public class EmacsKeyBindings {
     public static void executeEmac(Scene scene, KeyEvent event, boolean EmacsFlag, boolean CAFlag, boolean CFFlag, boolean CNFlag, boolean AUFlag, KeyBindingRepository keyBindingRepository) {
         if (EmacsFlag && scene.focusOwnerProperty().get() instanceof TextField) {
@@ -43,76 +45,21 @@ public class EmacsKeyBindings {
                 else if (keyBinding.get().equals(KeyBinding.EMACS_CAPITALIZE)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    String[] splitText = text.split("\\s+");
-                    int numOfSpace = 0;
-                    for (int i = 0; i < pos - 1; ++i) {
-                        if (text.charAt(i) == ' ') {
-                            numOfSpace++;
-                        }
-                    }
-                    if (pos == 0) {
-                        numOfSpace = -1;
-                    }
-                    String res = "";
-                    for (int i = 0; i < splitText.length; ++i) {
-                        if (i == numOfSpace + 1) {
-                            res += Character.toUpperCase(splitText[i].charAt(0));
-                            res += splitText[i].substring(1);
-                        } else {
-                            res += splitText[i];
-                        }
-                        res += " ";
-                    }
+                    String res = new StringChangeNextWord().editNextWordCapitalize(pos, text);
                     focusedTextField.setText(res);
                     focusedTextField.positionCaret(pos);
                 }
                 else if (keyBinding.get().equals(KeyBinding.EMACS_LOWERCASE)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    String[] splitText = text.split("\\s+");
-                    int numOfSpace = 0;
-                    for (int i = 0; i < pos - 1; ++i) {
-                        if (text.charAt(i) == ' ') {
-                            numOfSpace++;
-                        }
-                    }
-                    if (pos == 0) {
-                        numOfSpace = -1;
-                    }
-                    String res = "";
-                    for (int i = 0; i < splitText.length; ++i) {
-                        if (i == numOfSpace + 1) {
-                            res += splitText[i].toLowerCase();
-                        } else {
-                            res += splitText[i];
-                        }
-                        res += " ";
-                    }
+                    String res = new StringChangeNextWord().editNextWordLowerCase(pos, text);
                     focusedTextField.setText(res);
                     focusedTextField.positionCaret(pos);
                 }
                 else if (AUFlag && keyBinding.get().equals(KeyBinding.EMACS_UPPERCASE)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    String[] splitText = text.split("\\s+");
-                    int numOfSpace = 0;
-                    for (int i = 0; i < pos - 1; ++i) {
-                        if (text.charAt(i) == ' ') {
-                            numOfSpace++;
-                        }
-                    }
-                    if (pos == 0) {
-                        numOfSpace = -1;
-                    }
-                    String res = "";
-                    for (int i = 0; i < splitText.length; ++i) {
-                        if (i == numOfSpace + 1) {
-                            res += splitText[i].toUpperCase();
-                        } else {
-                            res += splitText[i];
-                        }
-                        res += " ";
-                    }
+                    String res = new StringChangeNextWord().editNextWordUpperCase(pos, text);
                     focusedTextField.setText(res);
                     focusedTextField.positionCaret(pos);
                 }
