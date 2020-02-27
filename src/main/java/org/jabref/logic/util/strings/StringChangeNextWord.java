@@ -61,6 +61,7 @@ public class StringChangeNextWord {
         }
         return res;
     }
+    
     /**
      * Make all characters in the next word lowercase. 
      *
