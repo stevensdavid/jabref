@@ -8,52 +8,52 @@ public class StringChangeNextWordTest {
 
     @Test
     public void editNextWordCapitalizePreservesNewlines() {
-        int pos = 3; //Postion of the caret, between the two "ll in the first hello"
-        String textInput = "hello\nhello";
-        String whatTextShouldBe = "hello\nHello";
+        int pos = 5; // Position of the caret, between the two ll in the first hellO"
+        String textInput = "hello\n\nhELLO";
+        String whatTextShouldBe = "hello\n\nHello";
         String textOutput = StringChangeNextWord.editNextWordCapitalize(pos, textInput);
         assertEquals(whatTextShouldBe, textOutput);
     }
 
     @Test
     public void editNextWordUpperCasePreservesSpace() {
-        int pos = 3; //Postion of the caret, between the two ll in the first hello
+        int pos = 3; // Position of the caret, between the two ll in the first hello
         String textInput = "hello hello";
-        String whatTextShouldBe = "hello HELLO";
+        String whatTextShouldBe = "helLO hello";
         String textOutput = StringChangeNextWord.editNextWordUpperCase(pos, textInput);
         assertEquals(whatTextShouldBe, textOutput);
     }
 
     @Test
     public void editNextWordUpperCasePreservesNewlines() {
-        int pos = 3; //Postion of the caret, between the two ll in the first hello
+        int pos = 3; // Position of the caret, between the two ll in the first hello
         String textInput = "hello\nhello";
-        String whatTextShouldBe = "hello\nHELLO";
+        String whatTextShouldBe = "helLO\nhello";
         String textOutput = StringChangeNextWord.editNextWordUpperCase(pos, textInput);
         assertEquals(whatTextShouldBe, textOutput);
     }
 
     @Test
     public void editNextWordUpperCasePreservesTab() {
-        int pos = 3; //Postion of the caret, between the two ll in the first hello
+        int pos = 3; // Position of the caret, between the two ll in the first hello
         String textInput = "hello\thello";
-        String whatTextShouldBe = "hello\tHELLO";
+        String whatTextShouldBe = "helLO\thello";
         String textOutput = StringChangeNextWord.editNextWordUpperCase(pos, textInput);
         assertEquals(whatTextShouldBe, textOutput);
     }
 
     @Test
     public void editNextWordUpperCasePreservesDoubleSpace() {
-        int pos = 3; //Postion of the caret, between the two ll in the first hello
-        String textInput = "hello hello";
-        String whatTextShouldBe = "hello HELLO";
+        int pos = 5; // Position of the caret, at the first space
+        String textInput = "hello  hello";
+        String whatTextShouldBe = "hello  HELLO";
         String textOutput = StringChangeNextWord.editNextWordUpperCase(pos, textInput);
         assertEquals(whatTextShouldBe, textOutput);
     }
 
     @Test
     public void editNextWordUpperCasePreservesMixedSpaceNewLineTab() {
-        int pos = 3; //Postion of the caret, between the two ll in the first hello
+        int pos = 5; // Position of the caret, after first hello
         String textInput = "hello \n\thello";
         String whatTextShouldBe = "hello \n\tHELLO";
         String textOutput = StringChangeNextWord.editNextWordUpperCase(pos, textInput);
@@ -62,7 +62,7 @@ public class StringChangeNextWordTest {
 
     @Test
     public void editNextWordLowerCaseEditsTheNextWord() {
-        int pos = 3; //Postion of the caret, between the two ll in the first hello
+        int pos = 5; // Position of the caret, right at the space
         String textInput = "hello HELLO";
         String whatTextShouldBe = "hello hello";
         String textOutput = StringChangeNextWord.editNextWordLowerCase(pos, textInput);
@@ -70,8 +70,8 @@ public class StringChangeNextWordTest {
     }
 
     @Test
-    public void editNextWordToEmptyRemovesFromPostionUpToNextWord() {
-        int pos = 3; //Postion of the caret, between the two "ll in the first hello"
+    public void editNextWordToEmptyRemovesFromPositionUpToNextWord() {
+        int pos = 3; // Position of the caret, between the two "ll in the first hello"
         String textInput = "hello hello";
         String whatTextShouldBe = "hel hello";
         String textOutput = StringChangeNextWord.editNextWordToEmpty(pos, textInput);
@@ -80,7 +80,7 @@ public class StringChangeNextWordTest {
 
     @Test
     public void editNextWordToEmptyRemovesNextWordIfPositionIsInSpace() {
-        int pos = 5; //Postion of the caret, atfer the first hello"
+        int pos = 5; // Position of the caret, atfer the first hello"
         String textInput = "hello person";
         String whatTextShouldBe = "hello";
         String textOutput = StringChangeNextWord.editNextWordToEmpty(pos, textInput);

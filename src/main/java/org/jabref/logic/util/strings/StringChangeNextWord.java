@@ -7,6 +7,10 @@ public class StringChangeNextWord {
         CAPITALIZED
     }
 
+    private enum Direction {
+        NEXT, PREVIOUS
+    }
+
     /**
      * Get the number of spaces from beginning of line to cursor.
      *
@@ -27,29 +31,97 @@ public class StringChangeNextWord {
         return numOfSpace;
     }
 
-    private static String setNextWordsCase(int numOfSpace, String[] splitText, LetterCase targetCase) {
+    private static String setNextWordsCase(String text, int pos, LetterCase targetCase) {
         StringBuilder res = new StringBuilder();
-        for (int i = 0; i < splitText.length; ++i) {
-            if (i == numOfSpace + 1) {
+
+        int firstWordChar = pos;
+        boolean firstLetter = true;
+        int i = pos;
+        boolean firstLoop = true;
+        StringBuilder newWordBuilder = new StringBuilder();
+        for (; i < text.length(); i++) {
+            // Swallow whitespace
+            while (firstLoop && i < text.length() && !String.valueOf(text.charAt(i)).matches("\\w")) {
+                i++;
+            }
+            if (firstLoop) {
+                firstWordChar = i;
+                firstLoop = false;
+            }
+            char currentChar = text.charAt(i);
+            if (String.valueOf(currentChar).matches("\\w")) {
                 switch (targetCase) {
                     case UPPER:
-                        res.append(splitText[i].toUpperCase());
+                        newWordBuilder.append(Character.toUpperCase(currentChar));
                         break;
                     case LOWER:
-                        res.append(splitText[i].toLowerCase());
+                        newWordBuilder.append(Character.toLowerCase(currentChar));
                         break;
                     case CAPITALIZED:
-                        res.append(Character.toUpperCase(splitText[i].charAt(0)));
-                        // Set remainder of string to lower case
-                        res.append(splitText[i].substring(1).toLowerCase());
+                        if (firstLetter) {
+                            newWordBuilder.append(Character.toUpperCase(currentChar));
+                            firstLetter = false;
+                        } else {
+                            newWordBuilder.append(Character.toLowerCase(currentChar));
+                        }
                         break;
                 }
             } else {
-                res.append(splitText[i]);
+                // We have reached the word boundary.
+                break;
             }
-            if (i < splitText.length - 1) {
-                res.append(" ");
+        }
+        res.append(text, 0, firstWordChar);
+        res.append(newWordBuilder);
+        res.append(text, i, text.length());
+        return res.toString();
+    }
+
+    /**
+     * Delete all characters in a string from the given position to the next word boundary.
+     *
+     * @param pos The index to start from.
+     * @param text The text to manipulate.
+     * @param dir The direction to search.
+     * @return The resulting text.
+     */
+    public static String deleteUntilWordBoundary(int pos, String text, Direction dir) {
+        StringBuilder res = new StringBuilder();
+        int offset;
+        int wordBreak;
+        switch (dir) {
+            case NEXT:
+                res.append(text, 0, pos);
+                offset = 1;
+                wordBreak = text.length();
+                break;
+            case PREVIOUS:
+                res.append(text, pos, text.length());
+                offset = -1;
+                wordBreak = 0;
+                break;
+            default:
+                throw new AssertionError("Missing case in switch deleteUntilWordBoundary");
+        }
+
+        for (int i = pos; i < text.length() && i >= 0; i += offset) {
+            if (i == pos) {
+                // Swallow whitespace until we hit a word character or newline.
+                while (i < text.length()
+                        && i >= 0
+                        && !String.valueOf(text.charAt(i)).matches("\\w|[\\r\\n]")) {
+                    i += offset;
+                }
             }
+            if (!String.valueOf(text.charAt(i)).matches("\\w")) {
+                wordBreak = i;
+            }
+        }
+
+        if (dir == Direction.NEXT) {
+            res.append(text, wordBreak, text.length());
+        } else {
+            res.append(text, 0, wordBreak);
         }
         return res.toString();
     }
@@ -62,6 +134,7 @@ public class StringChangeNextWord {
      * @param text string to analyze
      * @return String the result text
      */
+    @Deprecated
     public static String getNextWordEmpty(int pos, int numOfSpace, String text) {
         StringBuilder res = new StringBuilder();
         if (text.charAt(pos) == ' ') {
@@ -70,7 +143,7 @@ public class StringChangeNextWord {
             for (int i = 0; i < text.length(); ++i) {
                 if (i < pos) {
                     res.append(text.charAt(i));
-                } 
+                }
                 else {
                     if (meetNextSpace && text.charAt(i) != ' ') {
                         meetNumWord++;
@@ -92,11 +165,11 @@ public class StringChangeNextWord {
             for (int i = 0; i < text.length(); ++i) {
                 if (i < pos) {
                     res.append(text.charAt(i));
-                } 
+                }
                 else {
                     if (meetNextWord) {
                         res.append(text.charAt(i));
-                    } 
+                    }
                     else {
                         if (text.charAt(i) == ' ') {
                             meetNextSpace = true;
@@ -122,6 +195,7 @@ public class StringChangeNextWord {
      * @param splitText array of strings to analyze
      * @return String the result text
      */
+    @Deprecated
     public static String getPreviousWordEmpty(int numOfSpace, String[] splitText) {
         StringBuilder res = new StringBuilder();
 
@@ -144,10 +218,7 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String editNextWordCapitalize(int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
-        String res = setNextWordsCase(numOfSpace, splitText, LetterCase.CAPITALIZED);
-        return res;
+        return setNextWordsCase(text, pos, LetterCase.CAPITALIZED);
     }
 
     /**
@@ -158,10 +229,7 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String editNextWordUpperCase(int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
-        String res = setNextWordsCase(numOfSpace, splitText, LetterCase.UPPER);
-        return res;
+        return setNextWordsCase(text, pos, LetterCase.UPPER);
     }
 
     /**
@@ -172,10 +240,7 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String editNextWordLowerCase(int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
-        String res = setNextWordsCase(numOfSpace, splitText, LetterCase.LOWER);
-        return res;
+        return setNextWordsCase(text, pos, LetterCase.LOWER);
     }
 
     /**
@@ -186,10 +251,7 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String editNextWordToEmpty(int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
-        String res = getNextWordEmpty(pos, numOfSpace, text);
-        return res;
+        return deleteUntilWordBoundary(pos, text, Direction.NEXT);
     }
 
     /**
@@ -200,9 +262,6 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String editPreviousWordToEmpty(int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
-        String res = getPreviousWordEmpty(numOfSpace, splitText);
-        return res;
+        return deleteUntilWordBoundary(pos, text, Direction.PREVIOUS);
     }
 }
