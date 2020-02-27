@@ -33,14 +33,15 @@ public class StringChangeNextWord {
             if (i == numOfSpace + 1) {
                 switch (targetCase) {
                     case UPPER:
-                        res.append(Character.toUpperCase(splitText[i].charAt(0)));
+                        res.append(splitText[i].toUpperCase());
                         break;
                     case LOWER:
-                        res.append(Character.toLowerCase(splitText[i].charAt(0)));
+                        res.append(splitText[i].toLowerCase());
                         break;
                     case CAPITALIZED:
                         res.append(Character.toUpperCase(splitText[i].charAt(0)));
-                        res.append(splitText[i].substring(1));
+                        // Set remainder of string to lower case
+                        res.append(splitText[i].substring(1).toLowerCase());
                         break;
                 }
             } else {
