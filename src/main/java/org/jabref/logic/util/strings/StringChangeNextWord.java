@@ -98,28 +98,51 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String getNextWordEmpty(int pos, int numOfSpace, String text) {
-        String[] splitText = text.split("\\s+");
-        String res = "";
-        if (text.charAt(pos) == ' ' || (pos > 0 && text.charAt(pos - 1) == ' ')) {
-            for (int i = 0; i < splitText.length; ++i) {
-                if (i != numOfSpace + 1) {
-                    res += splitText[i];
-                }
-                if (i < splitText.length - 1) {
-                    res += " ";
+        StringBuilder res = new StringBuilder();
+        if (text.charAt(pos) == ' ') {
+            boolean meetNextSpace = true;
+            int meetNumWord = 0;
+            for (int i = 0; i < text.length(); ++i) {
+                if (i < pos) {
+                    res.append(text.charAt(i));
+                } 
+                else {
+                    if (meetNextSpace && text.charAt(i) != ' ') {
+                        meetNumWord++;
+                        meetNextSpace = false;
+                    } else {
+                        if (meetNumWord > 0 && text.charAt(i) == ' ') {
+                            meetNextSpace = true;
+                        }
+                    }
+                    if (meetNumWord == 2) {
+                        res.append(text.charAt(i));
+                    }
                 }
             }
-        } else {
-            int indexSpace = 0;
+        }
+        else {
+            boolean meetNextSpace = false;
+            boolean meetNextWord = false;
             for (int i = 0; i < text.length(); ++i) {
-                if (text.charAt(i) == ' ') {
-                    indexSpace++;
-                }
                 if (i < pos) {
-                    res += text.charAt(i);
-                } else {
-                    if (indexSpace > numOfSpace) {
-                        res += text.charAt(i);
+                    res.append(text.charAt(i));
+                } 
+                else {
+                    if (meetNextWord) {
+                        res.append(text.charAt(i));
+                    } 
+                    else {
+                        if (text.charAt(i) == ' ') {
+                            meetNextSpace = true;
+                            res.append(text.charAt(i));
+                        }
+                        else {
+                            if (meetNextSpace) {
+                                meetNextWord = true;
+                                res.append(text.charAt(i));
+                            }
+                        }
                     }
                 }
             }
