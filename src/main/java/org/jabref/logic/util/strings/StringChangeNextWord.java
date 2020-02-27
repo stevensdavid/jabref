@@ -23,26 +23,26 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Get the overall string for capitalizaing the next word.
+     * Get the overall string for capitalizing the next word.
      *
      * @param numOfSpace the number of spaces from the beginning to the cursor
      * @param splitText array of strings to analyze
      * @return String the result text
      */
     public static String getNextWordCapitalize(int numOfSpace, String[] splitText) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
-                res += Character.toUpperCase(splitText[i].charAt(0));
-                res += splitText[i].substring(1);
+                res.append(Character.toUpperCase(splitText[i].charAt(0)));
+                res.append(splitText[i].substring(1));
             } else {
-                res += splitText[i];
+                res.append(splitText[i]);
             }
-            if(i < splitText.length - 1) {
-                res += " ";
+            if (i < splitText.length - 1) {
+                res.append(" ");
             }
         }
-        return res;
+        return res.toString();
     }
 
     /**
@@ -53,18 +53,18 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String getNextWordUpperCase(int numOfSpace, String[] splitText) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
-                res += splitText[i].toUpperCase();
+                res.append(splitText[i].toUpperCase());
             } else {
-                res += splitText[i];
+                res.append(splitText[i]);
             }
-            if(i < splitText.length - 1) {
-                res += " ";
+            if (i < splitText.length - 1) {
+                res.append(" ");
             }
         }
-        return res;
+        return res.toString();
     }
 
     /**
@@ -75,18 +75,18 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String getNextWordLowerCase(int numOfSpace, String[] splitText) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
-                res += splitText[i].toLowerCase();
+                res.append(splitText[i].toLowerCase());
             } else {
-                res += splitText[i];
+                res.append(splitText[i]);
             }
-            if(i < splitText.length - 1) {
-                res += " ";
+            if (i < splitText.length - 1) {
+                res.append(" ");
             }
         }
-        return res;
+        return res.toString();
     }
 
     /**
@@ -97,17 +97,17 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String getNextWordEmpty(int numOfSpace, String[] splitText) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (int i = 0; i < splitText.length; ++i) {
             if (i != numOfSpace + 1) {
-                res += splitText[i];
+                res.append(splitText[i]);
             }
             //Add spaces between each word except the last one
-            if(i < splitText.length - 2) {
-                res += " ";
+            if (i < splitText.length - 2) {
+                res.append(" ");
             }
         }
-        return res;
+        return res.toString();
     }
 
     /**
@@ -118,16 +118,16 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String getPreviousWordEmpty(int numOfSpace, String[] splitText) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         for (int i = 0; i < splitText.length; ++i) {
             if (i != numOfSpace) {
-                res += splitText[i];
+                res.append(splitText[i]);
             }
-            if(i < splitText.length - 1) {
-                res += " ";
+            if (i < splitText.length - 1) {
+                res.append(" ");
             }
         }
-        return res;
+        return res.toString();
     }
 
     /**
