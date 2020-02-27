@@ -36,7 +36,6 @@ public class StringChangeNextWord {
     private static CaretPostionResultText setNextWordsCase(String text, int pos, LetterCase targetCase) {
         StringBuilder res = new StringBuilder();
 
-        int firstWordChar = pos;
         boolean firstLetter = true;
         int i = pos;
         boolean firstLoop = true;
@@ -44,10 +43,13 @@ public class StringChangeNextWord {
         for (; i < text.length(); i++) {
             // Swallow whitespace
             while (firstLoop && i < text.length() && !String.valueOf(text.charAt(i)).matches("\\w")) {
+                newWordBuilder.append(text.charAt(i));
                 i++;
             }
+            if (i >= text.length()) {
+                break;
+            }
             if (firstLoop) {
-                firstWordChar = i;
                 firstLoop = false;
             }
             char currentChar = text.charAt(i);
@@ -73,9 +75,10 @@ public class StringChangeNextWord {
                 break;
             }
         }
-        res.append(text, 0, firstWordChar);
+        res.append(text, 0, pos);
         res.append(newWordBuilder);
         res.append(text, i, text.length());
+
         return new CaretPostionResultText(i, res.toString());
     }
 
@@ -115,8 +118,9 @@ public class StringChangeNextWord {
                     i += offset;
                 }
             }
-            if (!String.valueOf(text.charAt(i)).matches("\\w")) {
+            if (!(i < text.length() && i >= 0) || !String.valueOf(text.charAt(i)).matches("\\w")) {
                 wordBreak = i;
+                break;
             }
         }
         int caretPosition;
@@ -126,9 +130,14 @@ public class StringChangeNextWord {
             caretPosition = pos;
 
         } else {
-            res.append(text, 0, wordBreak);
             // Since we deleted backwards, we need to move the caret appropriately.
-            caretPosition = wordBreak;
+            // We need to protect against having stepped beyond the string during the while-loop.
+            if (wordBreak != -1) {
+                res.append(text, 0, wordBreak);
+                caretPosition = wordBreak;
+            } else {
+                caretPosition = 0;
+            }
         }
         return new CaretPostionResultText(caretPosition, res.toString());
     }
