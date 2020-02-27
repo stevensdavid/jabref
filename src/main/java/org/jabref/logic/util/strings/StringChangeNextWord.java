@@ -58,7 +58,6 @@ public class StringChangeNextWord {
      * Get the overall string for making the next word empty.
      *
      * @param pos the position of the cursor
-     * @param numOfSpace the number of spaces from the beginning to the cursor
      * @param text string to analyze
      * @return String the result text
      */
@@ -185,7 +184,6 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String editNextWordToEmpty(int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
         String res = getNextWordEmpty(pos, text);
         return res;
     }
@@ -198,7 +196,6 @@ public class StringChangeNextWord {
      * @return String the result text
      */
     public static String editPreviousWordToEmpty(int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
         StringBuilder reverseText = new StringBuilder(text);
         reverseText.reverse();
         String res = getNextWordEmpty(pos, reverseText.toString());
