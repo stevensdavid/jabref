@@ -63,6 +63,10 @@ public class EmacsKeyBindings {
                     focusedTextField.setText(res);
                     focusedTextField.positionCaret(pos);
                 }
+                else if (keyBinding.get().equals(KeyBinding.EMACS_KILLLINE)) {
+                    focusedTextField.setText("");
+                    focusedTextField.positionCaret(0);
+                }
                 event.consume();
             }
         }

@@ -16,6 +16,7 @@ public enum KeyBinding {
     EMACS_CAPITALIZE("Emacs capitalize next word", Localization.lang("Capitalize the next word"), "alt+C", KeyBindingCategory.EDIT),
     EMACS_LOWERCASE("Emacs lowercase next word", Localization.lang("Make all characters in the next word lowercase"), "alt+L", KeyBindingCategory.EDIT),
     EMACS_UPPERCASE("Emacs uppercase next word", Localization.lang("Make all characters in the next word uppercase"), "alt+U", KeyBindingCategory.EDIT),
+    EMACS_KILLLINE("Emacs remove line", Localization.lang("Remove all the words in the line"), "ctrl+K", KeyBindingCategory.EDIT),
 
     ABBREVIATE("Abbreviate", Localization.lang("Abbreviate journal names"), "ctrl+alt+A", KeyBindingCategory.TOOLS),
     AUTOGENERATE_BIBTEX_KEYS("Autogenerate BibTeX keys", Localization.lang("Autogenerate BibTeX keys"), "ctrl+G", KeyBindingCategory.QUALITY),
