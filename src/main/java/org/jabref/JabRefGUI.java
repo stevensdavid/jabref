@@ -92,7 +92,7 @@ public class JabRefGUI {
 
         //Handle Emacs key bindings
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            EmacsKeyBindings.executeEmac(scene, event);
+            EmacsKeyBindings.executeEmacs(scene, event);
         });
 
         Globals.getThemeLoader().installCss(scene, Globals.prefs);

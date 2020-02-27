@@ -13,7 +13,7 @@ import org.jabref.preferences.JabRefPreferences;
 
 public class EmacsKeyBindings {
 
-    public static void executeEmac(Scene scene, KeyEvent event) {
+    public static void executeEmacs(Scene scene, KeyEvent event) {
         boolean EmacsFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS);
         if (EmacsFlag && scene.focusOwnerProperty().get() instanceof TextInputControl) {
             boolean CAFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA);
