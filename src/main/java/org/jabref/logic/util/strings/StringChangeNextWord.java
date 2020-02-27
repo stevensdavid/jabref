@@ -23,15 +23,13 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Capitalize the next word on the right side of the cursor. 
+     * Get the overall string for capitalizaing the next word. 
      *
-     * @param pos the position of the cursor
-     * @param text String to analyze
+     * @param numOfSpace the number of spaces from the beginning to the cursor
+     * @param splitText array of strings to analyze
      * @return String the result text
      */
-    public String editNextWordCapitalize (int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
+    public String getNextWordCapitalize (int numOfSpace, String[] splitText) {
         String res = "";
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
@@ -46,15 +44,13 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Make all characters in the next word uppercase. 
+     * Get the overall string for making the next word uppercase. 
      *
-     * @param pos the position of the cursor
-     * @param text String to analyze
+     * @param numOfSpace the number of spaces from the beginning to the cursor
+     * @param splitText array of strings to analyze
      * @return String the result text
      */
-    public String editNextWordUpperCase (int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
+    public String getNextWordUpperCase (int numOfSpace, String[] splitText) {
         String res = "";
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
@@ -68,15 +64,13 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Make all characters in the next word lowercase. 
+     * Get the overall string for making the next word lowercase. 
      *
-     * @param pos the position of the cursor
-     * @param text String to analyze
+     * @param numOfSpace the number of spaces from the beginning to the cursor
+     * @param splitText array of strings to analyze
      * @return String the result text
      */
-    public String editNextWordLowerCase (int pos, String text) {
-        int numOfSpace = getNumOfSpace(pos, text);
-        String[] splitText = text.split("\\s+");
+    public String getNextWordLowerCase (int numOfSpace, String[] splitText) {
         String res = "";
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
@@ -90,6 +84,66 @@ public class StringChangeNextWord {
     }
 
     /**
+     * Get the overall string for making the next word empty. 
+     *
+     * @param numOfSpace the number of spaces from the beginning to the cursor
+     * @param splitText array of strings to analyze
+     * @return String the result text
+     */
+    public String getNextWordEmpty (int numOfSpace, String[] splitText) {
+        String res = "";
+        for (int i = 0; i < splitText.length; ++i) {
+            if (i != numOfSpace + 1) {
+                res += splitText[i];
+                res += " ";
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Capitalize the next word on the right side of the cursor. 
+     *
+     * @param pos the position of the cursor
+     * @param text String to analyze
+     * @return String the result text
+     */
+    public String editNextWordCapitalize (int pos, String text) {
+        int numOfSpace = getNumOfSpace(pos, text);
+        String[] splitText = text.split("\\s+");
+        String res = getNextWordCapitalize(numOfSpace, splitText);
+        return res;
+    }
+
+    /**
+     * Make all characters in the next word uppercase. 
+     *
+     * @param pos the position of the cursor
+     * @param text String to analyze
+     * @return String the result text
+     */
+    public String editNextWordUpperCase (int pos, String text) {
+        int numOfSpace = getNumOfSpace(pos, text);
+        String[] splitText = text.split("\\s+");
+        String res = getNextWordUpperCase(numOfSpace, splitText);
+        return res;
+    }
+
+    /**
+     * Make all characters in the next word lowercase. 
+     *
+     * @param pos the position of the cursor
+     * @param text String to analyze
+     * @return String the result text
+     */
+    public String editNextWordLowerCase (int pos, String text) {
+        int numOfSpace = getNumOfSpace(pos, text);
+        String[] splitText = text.split("\\s+");
+        String res = getNextWordLowerCase(numOfSpace, splitText);
+        return res;
+    }
+
+    /**
      * Remove the next word on the right side of the cursor.
      *
      * @param pos the position of the cursor
@@ -99,13 +153,7 @@ public class StringChangeNextWord {
     public String editNextWordToEmpty (int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
-        String res = "";
-        for (int i = 0; i < splitText.length; ++i) {
-            if (i != numOfSpace + 1) {
-                res += splitText[i];
-                res += " ";
-            }
-        }
+        String res = getNextWordEmpty(numOfSpace, splitText);
         return res;
     }
 }
