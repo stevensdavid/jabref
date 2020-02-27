@@ -5,13 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-//import java.util.Optional;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-//import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -24,7 +20,7 @@ import org.jabref.gui.help.VersionWorker;
 import org.jabref.gui.icon.IconTheme;
 import org.jabref.gui.importer.ParserResultWarningDialog;
 import org.jabref.gui.importer.actions.OpenDatabaseAction;
-import org.jabref.gui.keyboard.KeyBinding;
+import org.jabref.gui.keyboard.EmacsKeyBindings;
 import org.jabref.gui.keyboard.KeyBindingRepository;
 import org.jabref.gui.shared.SharedDatabaseUIManager;
 import org.jabref.logic.autosaveandbackup.BackupManager;
@@ -35,9 +31,6 @@ import org.jabref.logic.shared.exception.InvalidDBMSConnectionPropertiesExceptio
 import org.jabref.logic.shared.exception.NotASharedDatabaseException;
 import org.jabref.model.database.shared.DatabaseNotSupportedException;
 import org.jabref.preferences.JabRefPreferences;
-import org.jabref.gui.keyboard.KeyBindingRepository;
-//import org.jabref.gui.keyboard.KeyBinding;
-import org.jabref.gui.keyboard.EmacsKeyBindings2;
 
 import impl.org.controlsfx.skin.DecorationPane;
 import org.slf4j.Logger;
@@ -105,7 +98,7 @@ public class JabRefGUI {
             boolean CNFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CN);
             boolean AUFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_AU);
             KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
-            EmacsKeyBindings2.executeEmac(scene, event, EmacsFlag, CAFlag, CFFlag, CNFlag, AUFlag, keyBindingRepository);
+            EmacsKeyBindings.executeEmac(scene, event, EmacsFlag, CAFlag, CFFlag, CNFlag, AUFlag, keyBindingRepository);
         });
 
         Globals.getThemeLoader().installCss(scene, Globals.prefs);
