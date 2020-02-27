@@ -21,7 +21,6 @@ import org.jabref.gui.icon.IconTheme;
 import org.jabref.gui.importer.ParserResultWarningDialog;
 import org.jabref.gui.importer.actions.OpenDatabaseAction;
 import org.jabref.gui.keyboard.EmacsKeyBindings;
-import org.jabref.gui.keyboard.KeyBindingRepository;
 import org.jabref.gui.shared.SharedDatabaseUIManager;
 import org.jabref.logic.autosaveandbackup.BackupManager;
 import org.jabref.logic.importer.OpenDatabase;
@@ -91,14 +90,9 @@ public class JabRefGUI {
 
         Scene scene = new Scene(root, 800, 800);
 
+        //Handle Emacs key bindings
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            boolean EmacsFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS);
-            boolean CAFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA);
-            boolean CFFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CF);
-            boolean CNFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CN);
-            boolean AUFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_AU);
-            KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
-            EmacsKeyBindings.executeEmac(scene, event, EmacsFlag, CAFlag, CFFlag, CNFlag, AUFlag, keyBindingRepository);
+            EmacsKeyBindings.executeEmac(scene, event);
         });
 
         Globals.getThemeLoader().installCss(scene, Globals.prefs);
