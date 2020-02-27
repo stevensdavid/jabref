@@ -13,6 +13,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 //import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 import org.jabref.gui.BasePanel;
 import org.jabref.gui.GUIGlobals;
@@ -22,6 +24,8 @@ import org.jabref.gui.help.VersionWorker;
 import org.jabref.gui.icon.IconTheme;
 import org.jabref.gui.importer.ParserResultWarningDialog;
 import org.jabref.gui.importer.actions.OpenDatabaseAction;
+import org.jabref.gui.keyboard.KeyBinding;
+import org.jabref.gui.keyboard.KeyBindingRepository;
 import org.jabref.gui.shared.SharedDatabaseUIManager;
 import org.jabref.logic.autosaveandbackup.BackupManager;
 import org.jabref.logic.importer.OpenDatabase;
@@ -98,8 +102,10 @@ public class JabRefGUI {
             boolean EmacsFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS);
             boolean CAFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CA);
             boolean CFFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CF);
+            boolean CNFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_CN);
+            boolean AUFlag = Globals.prefs.getBoolean(JabRefPreferences.EDITOR_EMACS_KEYBINDINGS_REBIND_AU);
             KeyBindingRepository keyBindingRepository = Globals.getKeyPrefs();
-            EmacsKeyBindings2.executeEmac(scene, event, EmacsFlag, CAFlag, CFFlag, keyBindingRepository);
+            EmacsKeyBindings2.executeEmac(scene, event, EmacsFlag, CAFlag, CFFlag, CNFlag, AUFlag, keyBindingRepository);
         });
 
         Globals.getThemeLoader().installCss(scene, Globals.prefs);

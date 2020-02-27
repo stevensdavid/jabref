@@ -38,6 +38,16 @@
             <Insets left="20.0"/>
         </padding>
     </CheckBox>
+    <CheckBox fx:id="enableEmacsRebindCN" text="%Rebind C-n, too">
+        <padding>
+            <Insets left="20.0"/>
+        </padding>
+    </CheckBox>
+    <CheckBox fx:id="enableEmacsRebindAU" text="%Rebind A-u, too">
+        <padding>
+            <Insets left="20.0"/>
+        </padding>
+    </CheckBox>
     <Label styleClass="sectionHeader" text="%Autocompletion"/>
     <CheckBox fx:id="enableAutoComplete" text="%Use autocompletion"/>
     <VBox spacing="10.0">
