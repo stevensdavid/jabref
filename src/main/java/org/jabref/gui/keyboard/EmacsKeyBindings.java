@@ -64,8 +64,9 @@ public class EmacsKeyBindings {
                     focusedTextField.positionCaret(pos);
                 }
                 else if (keyBinding.get().equals(KeyBinding.EMACS_KILLLINE)) {
-                    focusedTextField.setText("");
-                    focusedTextField.positionCaret(0);
+                    int pos = focusedTextField.getCaretPosition();
+                    focusedTextField.setText(focusedTextField.getText(0, pos));
+                    focusedTextField.positionCaret(pos);
                 }
                 else if (keyBinding.get().equals(KeyBinding.EMACS_KILLWORD)) {
                     int pos = focusedTextField.getCaretPosition();
