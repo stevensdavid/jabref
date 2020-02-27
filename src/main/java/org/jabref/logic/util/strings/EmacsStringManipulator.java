@@ -1,7 +1,7 @@
 package org.jabref.logic.util.strings;
-import org.jabref.model.util.CaretPostionResultText;
+import org.jabref.model.util.ResultingEmacsState;
 
-public class StringChangeNextWord {
+public class EmacsStringManipulator {
     private enum LetterCase {
         UPPER,
         LOWER,
@@ -12,28 +12,7 @@ public class StringChangeNextWord {
         NEXT, PREVIOUS
     }
 
-    /**
-     * Get the number of spaces from beginning of line to cursor.
-     *
-     * @param pos the position of the cursor
-     * @param text String to analyze
-     * @return int number of spaces
-     */
-    @Deprecated
-    public static int getNumOfSpace(int pos, String text) {
-        int numOfSpace = 0;
-        for (int i = 0; i < pos - 1; ++i) {
-            if (text.charAt(i) == ' ') {
-                numOfSpace++;
-            }
-        }
-        if (pos == 0) {
-            numOfSpace = -1;
-        }
-        return numOfSpace;
-    }
-
-    private static CaretPostionResultText setNextWordsCase(String text, int pos, LetterCase targetCase) {
+    private static ResultingEmacsState setNextWordsCase(String text, int pos, LetterCase targetCase) {
         StringBuilder res = new StringBuilder();
 
         boolean firstLetter = true;
@@ -79,7 +58,7 @@ public class StringChangeNextWord {
         res.append(newWordBuilder);
         res.append(text, i, text.length());
 
-        return new CaretPostionResultText(i, res.toString());
+        return new ResultingEmacsState(i, res.toString());
     }
 
     /**
@@ -90,7 +69,7 @@ public class StringChangeNextWord {
      * @param dir The direction to search.
      * @return The resulting text.
      */
-    public static CaretPostionResultText deleteUntilWordBoundary(int pos, String text, Direction dir) {
+    public static ResultingEmacsState deleteUntilWordBoundary(int pos, String text, Direction dir) {
         StringBuilder res = new StringBuilder();
         int offset;
         int wordBreak;
@@ -139,89 +118,7 @@ public class StringChangeNextWord {
                 caretPosition = 0;
             }
         }
-        return new CaretPostionResultText(caretPosition, res.toString());
-    }
-
-    /**
-     * Get the overall string for making the next word empty.
-     *
-     * @param pos the position of the cursor
-     * @param text string to analyze
-     * @return String the result text
-     */
-    @Deprecated
-    public static String getNextWordEmpty(int pos, String text) {
-        StringBuilder res = new StringBuilder();
-        if (text.charAt(pos) == ' ') {
-            boolean meetNextSpace = true;
-            int meetNumWord = 0;
-            for (int i = 0; i < text.length(); ++i) {
-                if (i < pos) {
-                    res.append(text.charAt(i));
-                }
-                else {
-                    if (meetNextSpace && text.charAt(i) != ' ') {
-                        meetNumWord++;
-                        meetNextSpace = false;
-                    } else {
-                        if (meetNumWord > 0 && text.charAt(i) == ' ') {
-                            meetNextSpace = true;
-                        }
-                    }
-                    if (meetNumWord >= 2) {
-                        res.append(text.charAt(i));
-                    }
-                }
-            }
-        }
-        else {
-            boolean meetNextSpace = false;
-            boolean meetNextWord = false;
-            for (int i = 0; i < text.length(); ++i) {
-                if (i < pos) {
-                    res.append(text.charAt(i));
-                }
-                else {
-                    if (meetNextWord) {
-                        res.append(text.charAt(i));
-                    }
-                    else {
-                        if (text.charAt(i) == ' ') {
-                            meetNextSpace = true;
-                            res.append(text.charAt(i));
-                        }
-                        else {
-                            if (meetNextSpace) {
-                                meetNextWord = true;
-                                res.append(text.charAt(i));
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return res.toString();
-    }
-
-    /**
-     * Get the overall string for making the previous word empty.
-     *
-     * @param numOfSpace the number of spaces from the beginning to the cursor
-     * @param splitText array of strings to analyze
-     * @return String the result text
-     */
-    @Deprecated
-    public static String getPreviousWordEmpty(int numOfSpace, String[] splitText) {
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < splitText.length; ++i) {
-            if (i != numOfSpace) {
-                res.append(splitText[i]);
-            }
-            if (i < splitText.length - 1) {
-                res.append(" ");
-            }
-        }
-        return res.toString();
+        return new ResultingEmacsState(caretPosition, res.toString());
     }
 
     /**
@@ -231,7 +128,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static CaretPostionResultText editNextWordCapitalize(int pos, String text) {
+    public static ResultingEmacsState capitalize(int pos, String text) {
         return setNextWordsCase(text, pos, LetterCase.CAPITALIZED);
     }
 
@@ -242,7 +139,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static CaretPostionResultText editNextWordUpperCase(int pos, String text) {
+    public static ResultingEmacsState uppercase(int pos, String text) {
         return setNextWordsCase(text, pos, LetterCase.UPPER);
     }
 
@@ -253,7 +150,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static CaretPostionResultText editNextWordLowerCase(int pos, String text) {
+    public static ResultingEmacsState lowercase(int pos, String text) {
         return setNextWordsCase(text, pos, LetterCase.LOWER);
     }
 
@@ -264,7 +161,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static CaretPostionResultText editNextWordToEmpty(int pos, String text) {
+    public static ResultingEmacsState killWord(int pos, String text) {
         return deleteUntilWordBoundary(pos, text, Direction.NEXT);
     }
 
@@ -275,7 +172,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static CaretPostionResultText editPreviousWordToEmpty(int pos, String text) {
+    public static ResultingEmacsState backwardKillWord(int pos, String text) {
         return deleteUntilWordBoundary(pos, text, Direction.PREVIOUS);
     }
 }

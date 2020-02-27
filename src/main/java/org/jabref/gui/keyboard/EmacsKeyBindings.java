@@ -7,8 +7,8 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyEvent;
 
 import org.jabref.Globals;
-import org.jabref.logic.util.strings.StringChangeNextWord;
-import org.jabref.model.util.CaretPostionResultText;
+import org.jabref.logic.util.strings.EmacsStringManipulator;
+import org.jabref.model.util.ResultingEmacsState;
 import org.jabref.preferences.JabRefPreferences;
 
 public class EmacsKeyBindings {
@@ -55,24 +55,24 @@ public class EmacsKeyBindings {
                 } else if (keyBinding.get().equals(KeyBinding.EMACS_CAPITALIZE)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    CaretPostionResultText res = StringChangeNextWord.editNextWordCapitalize(pos, text);
-                    focusedTextField.setText(res.resText);
+                    ResultingEmacsState res = EmacsStringManipulator.capitalize(pos, text);
+                    focusedTextField.setText(res.text);
                     focusedTextField.positionCaret(res.caretPos);
                     event.consume();
                 }
                 else if (keyBinding.get().equals(KeyBinding.EMACS_LOWERCASE)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    CaretPostionResultText res = StringChangeNextWord.editNextWordLowerCase(pos, text);
-                    focusedTextField.setText(res.resText);
+                    ResultingEmacsState res = EmacsStringManipulator.lowercase(pos, text);
+                    focusedTextField.setText(res.text);
                     focusedTextField.positionCaret(res.caretPos);
                     event.consume();
                 }
                 else if (AUFlag && keyBinding.get().equals(KeyBinding.EMACS_UPPERCASE)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    CaretPostionResultText res = StringChangeNextWord.editNextWordUpperCase(pos, text);
-                    focusedTextField.setText(res.resText);
+                    ResultingEmacsState res = EmacsStringManipulator.uppercase(pos, text);
+                    focusedTextField.setText(res.text);
                     focusedTextField.positionCaret(res.caretPos);
                     event.consume();
                 }
@@ -84,16 +84,16 @@ public class EmacsKeyBindings {
                 } else if (keyBinding.get().equals(KeyBinding.EMACS_KILLWORD)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    CaretPostionResultText res = StringChangeNextWord.editNextWordToEmpty(pos, text);
-                    focusedTextField.setText(res.resText);
+                    ResultingEmacsState res = EmacsStringManipulator.killWord(pos, text);
+                    focusedTextField.setText(res.text);
                     focusedTextField.positionCaret(res.caretPos);
                     event.consume();
                 }
                 else if (keyBinding.get().equals(KeyBinding.EMACS_BACKWARDKILLWORD)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    CaretPostionResultText res = StringChangeNextWord.editPreviousWordToEmpty(pos, text);
-                    focusedTextField.setText(res.resText);
+                    ResultingEmacsState res = EmacsStringManipulator.backwardKillWord(pos, text);
+                    focusedTextField.setText(res.text);
                     focusedTextField.positionCaret(res.caretPos);
                     event.consume();
                 }
