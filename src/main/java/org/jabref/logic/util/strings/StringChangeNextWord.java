@@ -1,4 +1,5 @@
 package org.jabref.logic.util.strings;
+import org.jabref.model.util.CaretPostionResultText;
 
 public class StringChangeNextWord {
     private enum LetterCase {
@@ -18,6 +19,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return int number of spaces
      */
+    @Deprecated
     public static int getNumOfSpace(int pos, String text) {
         int numOfSpace = 0;
         for (int i = 0; i < pos - 1; ++i) {
@@ -31,7 +33,7 @@ public class StringChangeNextWord {
         return numOfSpace;
     }
 
-    private static String setNextWordsCase(String text, int pos, LetterCase targetCase) {
+    private static CaretPostionResultText setNextWordsCase(String text, int pos, LetterCase targetCase) {
         StringBuilder res = new StringBuilder();
 
         int firstWordChar = pos;
@@ -74,7 +76,7 @@ public class StringChangeNextWord {
         res.append(text, 0, firstWordChar);
         res.append(newWordBuilder);
         res.append(text, i, text.length());
-        return res.toString();
+        return new CaretPostionResultText(i, res.toString());
     }
 
     /**
@@ -85,7 +87,7 @@ public class StringChangeNextWord {
      * @param dir The direction to search.
      * @return The resulting text.
      */
-    public static String deleteUntilWordBoundary(int pos, String text, Direction dir) {
+    public static CaretPostionResultText deleteUntilWordBoundary(int pos, String text, Direction dir) {
         StringBuilder res = new StringBuilder();
         int offset;
         int wordBreak;
@@ -117,13 +119,18 @@ public class StringChangeNextWord {
                 wordBreak = i;
             }
         }
-
+        int caretPosition;
         if (dir == Direction.NEXT) {
             res.append(text, wordBreak, text.length());
+            // Since we deleted forward, we're in the right place already.
+            caretPosition = pos;
+
         } else {
             res.append(text, 0, wordBreak);
+            // Since we deleted backwards, we need to move the caret appropriately.
+            caretPosition = wordBreak;
         }
-        return res.toString();
+        return new CaretPostionResultText(caretPosition, res.toString());
     }
 
     /**
@@ -215,7 +222,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editNextWordCapitalize(int pos, String text) {
+    public static CaretPostionResultText editNextWordCapitalize(int pos, String text) {
         return setNextWordsCase(text, pos, LetterCase.CAPITALIZED);
     }
 
@@ -226,7 +233,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editNextWordUpperCase(int pos, String text) {
+    public static CaretPostionResultText editNextWordUpperCase(int pos, String text) {
         return setNextWordsCase(text, pos, LetterCase.UPPER);
     }
 
@@ -237,7 +244,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editNextWordLowerCase(int pos, String text) {
+    public static CaretPostionResultText editNextWordLowerCase(int pos, String text) {
         return setNextWordsCase(text, pos, LetterCase.LOWER);
     }
 
@@ -248,7 +255,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editNextWordToEmpty(int pos, String text) {
+    public static CaretPostionResultText editNextWordToEmpty(int pos, String text) {
         return deleteUntilWordBoundary(pos, text, Direction.NEXT);
     }
 
@@ -259,7 +266,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editPreviousWordToEmpty(int pos, String text) {
+    public static CaretPostionResultText editPreviousWordToEmpty(int pos, String text) {
         return deleteUntilWordBoundary(pos, text, Direction.PREVIOUS);
     }
 }
