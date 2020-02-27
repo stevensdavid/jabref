@@ -1,4 +1,5 @@
 package org.jabref.logic.util.strings;
+import org.jabref.model.util.CaretPostionResultText;
 
 public class StringChangeNextWord {
     private enum LetterCase {
@@ -141,11 +142,11 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editNextWordCapitalize(int pos, String text) {
+    public static CaretPostionResultText editNextWordCapitalize(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
         String res = setNextWordsCase(numOfSpace, splitText, LetterCase.CAPITALIZED);
-        return res;
+        return new CaretPostionResultText(pos, res);
     }
 
     /**
@@ -155,11 +156,11 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editNextWordUpperCase(int pos, String text) {
+    public static CaretPostionResultText editNextWordUpperCase(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
         String res = setNextWordsCase(numOfSpace, splitText, LetterCase.UPPER);
-        return res;
+        return new CaretPostionResultText(pos, res);
     }
 
     /**
@@ -169,11 +170,11 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editNextWordLowerCase(int pos, String text) {
+    public static CaretPostionResultText editNextWordLowerCase(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
         String res = setNextWordsCase(numOfSpace, splitText, LetterCase.LOWER);
-        return res;
+        return new CaretPostionResultText(pos, res);
     }
 
     /**
@@ -183,9 +184,9 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editNextWordToEmpty(int pos, String text) {
+    public static CaretPostionResultText editNextWordToEmpty(int pos, String text) {
         String res = getNextWordEmpty(pos, text);
-        return res;
+        return new CaretPostionResultText(pos, res);
     }
 
     /**
@@ -195,12 +196,12 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public static String editPreviousWordToEmpty(int pos, String text) {
+    public static CaretPostionResultText editPreviousWordToEmpty(int pos, String text) {
         StringBuilder reverseText = new StringBuilder(text);
         reverseText.reverse();
         String res = getNextWordEmpty(pos, reverseText.toString());
         StringBuilder resText = new StringBuilder(res);
         resText.reverse();
-        return resText.toString();
+        return new CaretPostionResultText(pos, resText.toString());
     }
 }
