@@ -1,7 +1,7 @@
 package org.jabref.logic.util.strings;
 
 public class StringChangeNextWord {
-    
+
     /**
      * Get the number of spaces from beginning of line to cursor.
      *
@@ -23,7 +23,7 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Get the overall string for capitalizaing the next word. 
+     * Get the overall string for capitalizaing the next word.
      *
      * @param numOfSpace the number of spaces from the beginning to the cursor
      * @param splitText array of strings to analyze
@@ -46,7 +46,7 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Get the overall string for making the next word uppercase. 
+     * Get the overall string for making the next word uppercase.
      *
      * @param numOfSpace the number of spaces from the beginning to the cursor
      * @param splitText array of strings to analyze
@@ -68,7 +68,7 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Get the overall string for making the next word lowercase. 
+     * Get the overall string for making the next word lowercase.
      *
      * @param numOfSpace the number of spaces from the beginning to the cursor
      * @param splitText array of strings to analyze
@@ -90,7 +90,7 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Get the overall string for making the next word empty. 
+     * Get the overall string for making the next word empty.
      *
      * @param numOfSpace the number of spaces from the beginning to the cursor
      * @param splitText array of strings to analyze
@@ -102,7 +102,8 @@ public class StringChangeNextWord {
             if (i != numOfSpace + 1) {
                 res += splitText[i];
             }
-            if(i < splitText.length - 1) {
+            //Add spaces between each word except the last one
+            if(i < splitText.length - 2) {
                 res += " ";
             }
         }
@@ -110,7 +111,7 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Get the overall string for making the previous word empty. 
+     * Get the overall string for making the previous word empty.
      *
      * @param numOfSpace the number of spaces from the beginning to the cursor
      * @param splitText array of strings to analyze
@@ -130,7 +131,7 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Capitalize the next word on the right side of the cursor. 
+     * Capitalize the next word on the right side of the cursor.
      *
      * @param pos the position of the cursor
      * @param text String to analyze
@@ -144,7 +145,7 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Make all characters in the next word uppercase. 
+     * Make all characters in the next word uppercase.
      *
      * @param pos the position of the cursor
      * @param text String to analyze
@@ -158,7 +159,7 @@ public class StringChangeNextWord {
     }
 
     /**
-     * Make all characters in the next word lowercase. 
+     * Make all characters in the next word lowercase.
      *
      * @param pos the position of the cursor
      * @param text String to analyze
