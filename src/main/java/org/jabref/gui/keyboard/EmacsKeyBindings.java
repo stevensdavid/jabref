@@ -67,6 +67,13 @@ public class EmacsKeyBindings {
                     focusedTextField.setText("");
                     focusedTextField.positionCaret(0);
                 }
+                else if (keyBinding.get().equals(KeyBinding.EMACS_KILLWORD)) {
+                    int pos = focusedTextField.getCaretPosition();
+                    String text = focusedTextField.getText(0, focusedTextField.getText().length());
+                    String res = new StringChangeNextWord().editNextWordToEmpty(pos, text);
+                    focusedTextField.setText(res);
+                    focusedTextField.positionCaret(pos);
+                }
                 event.consume();
             }
         }
