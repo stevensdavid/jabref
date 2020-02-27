@@ -9,7 +9,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return int number of spaces
      */
-    public int getNumOfSpace (int pos, String text) {
+    public static int getNumOfSpace(int pos, String text) {
         int numOfSpace = 0;
         for (int i = 0; i < pos - 1; ++i) {
             if (text.charAt(i) == ' ') {
@@ -29,7 +29,7 @@ public class StringChangeNextWord {
      * @param splitText array of strings to analyze
      * @return String the result text
      */
-    public String getNextWordCapitalize (int numOfSpace, String[] splitText) {
+    public static String getNextWordCapitalize(int numOfSpace, String[] splitText) {
         String res = "";
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
@@ -52,7 +52,7 @@ public class StringChangeNextWord {
      * @param splitText array of strings to analyze
      * @return String the result text
      */
-    public String getNextWordUpperCase (int numOfSpace, String[] splitText) {
+    public static String getNextWordUpperCase(int numOfSpace, String[] splitText) {
         String res = "";
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
@@ -74,7 +74,7 @@ public class StringChangeNextWord {
      * @param splitText array of strings to analyze
      * @return String the result text
      */
-    public String getNextWordLowerCase (int numOfSpace, String[] splitText) {
+    public static String getNextWordLowerCase(int numOfSpace, String[] splitText) {
         String res = "";
         for (int i = 0; i < splitText.length; ++i) {
             if (i == numOfSpace + 1) {
@@ -96,7 +96,7 @@ public class StringChangeNextWord {
      * @param splitText array of strings to analyze
      * @return String the result text
      */
-    public String getNextWordEmpty (int numOfSpace, String[] splitText) {
+    public static String getNextWordEmpty(int numOfSpace, String[] splitText) {
         String res = "";
         for (int i = 0; i < splitText.length; ++i) {
             if (i != numOfSpace + 1) {
@@ -117,7 +117,7 @@ public class StringChangeNextWord {
      * @param splitText array of strings to analyze
      * @return String the result text
      */
-    public String getPreviousWordEmpty (int numOfSpace, String[] splitText) {
+    public static String getPreviousWordEmpty(int numOfSpace, String[] splitText) {
         String res = "";
         for (int i = 0; i < splitText.length; ++i) {
             if (i != numOfSpace) {
@@ -137,7 +137,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public String editNextWordCapitalize (int pos, String text) {
+    public static String editNextWordCapitalize(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
         String res = getNextWordCapitalize(numOfSpace, splitText);
@@ -151,7 +151,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public String editNextWordUpperCase (int pos, String text) {
+    public static String editNextWordUpperCase(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
         String res = getNextWordUpperCase(numOfSpace, splitText);
@@ -165,7 +165,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public String editNextWordLowerCase (int pos, String text) {
+    public static String editNextWordLowerCase(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
         String res = getNextWordLowerCase(numOfSpace, splitText);
@@ -179,7 +179,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public String editNextWordToEmpty (int pos, String text) {
+    public static String editNextWordToEmpty(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
         String res = getNextWordEmpty(numOfSpace, splitText);
@@ -193,7 +193,7 @@ public class StringChangeNextWord {
      * @param text String to analyze
      * @return String the result text
      */
-    public String editPreviousWordToEmpty (int pos, String text) {
+    public static String editPreviousWordToEmpty(int pos, String text) {
         int numOfSpace = getNumOfSpace(pos, text);
         String[] splitText = text.split("\\s+");
         String res = getPreviousWordEmpty(numOfSpace, splitText);

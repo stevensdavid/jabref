@@ -45,21 +45,21 @@ public class EmacsKeyBindings {
                 else if (keyBinding.get().equals(KeyBinding.EMACS_CAPITALIZE)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    String res = new StringChangeNextWord().editNextWordCapitalize(pos, text);
+                    String res = StringChangeNextWord.editNextWordCapitalize(pos, text);
                     focusedTextField.setText(res);
                     focusedTextField.positionCaret(pos);
                 }
                 else if (keyBinding.get().equals(KeyBinding.EMACS_LOWERCASE)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    String res = new StringChangeNextWord().editNextWordLowerCase(pos, text);
+                    String res = StringChangeNextWord.editNextWordLowerCase(pos, text);
                     focusedTextField.setText(res);
                     focusedTextField.positionCaret(pos);
                 }
                 else if (AUFlag && keyBinding.get().equals(KeyBinding.EMACS_UPPERCASE)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    String res = new StringChangeNextWord().editNextWordUpperCase(pos, text);
+                    String res = StringChangeNextWord.editNextWordUpperCase(pos, text);
                     focusedTextField.setText(res);
                     focusedTextField.positionCaret(pos);
                 }
@@ -70,14 +70,14 @@ public class EmacsKeyBindings {
                 else if (keyBinding.get().equals(KeyBinding.EMACS_KILLWORD)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    String res = new StringChangeNextWord().editNextWordToEmpty(pos, text);
+                    String res = StringChangeNextWord.editNextWordToEmpty(pos, text);
                     focusedTextField.setText(res);
                     focusedTextField.positionCaret(pos);
                 }
                 else if (keyBinding.get().equals(KeyBinding.EMACS_BACKWARDKILLWORD)) {
                     int pos = focusedTextField.getCaretPosition();
                     String text = focusedTextField.getText(0, focusedTextField.getText().length());
-                    String res = new StringChangeNextWord().editPreviousWordToEmpty(pos, text);
+                    String res = StringChangeNextWord.editPreviousWordToEmpty(pos, text);
                     focusedTextField.setText(res);
                     focusedTextField.positionCaret(pos);
                 }

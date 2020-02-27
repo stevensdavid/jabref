@@ -1,6 +1,5 @@
 package org.jabref.logic.util.strings;
 
-import org.jabref.logic.util.strings.StringChangeNextWord;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +11,7 @@ public class StringChangeNextWordTest {
         int pos = 3;
         String textInput = "hello\nhello";
         String whatTextShouldBe = "hello\nHello";
-        String textOutput = new StringChangeNextWord().editNextWordCapitalize(pos, textInput);
+        String textOutput = StringChangeNextWord.editNextWordCapitalize(pos, textInput);
         assertEquals(textOutput, whatTextShouldBe);
     }
 
@@ -21,7 +20,7 @@ public class StringChangeNextWordTest {
         int pos = 3;
         String textInput = "hello hello";
         String whatTextShouldBe = "hello HELLO";
-        String textOutput = new StringChangeNextWord().editNextWordUpperCase(pos, textInput);
+        String textOutput = StringChangeNextWord.editNextWordUpperCase(pos, textInput);
         assertEquals(textOutput, whatTextShouldBe);
     }
 
@@ -30,7 +29,7 @@ public class StringChangeNextWordTest {
         int pos = 3;
         String textInput = "hello HELLO";
         String whatTextShouldBe = "hello hello";
-        String textOutput = new StringChangeNextWord().editNextWordLowerCase(pos, textInput);
+        String textOutput = StringChangeNextWord.editNextWordLowerCase(pos, textInput);
         assertEquals(textOutput, whatTextShouldBe);
     }
 
@@ -39,7 +38,7 @@ public class StringChangeNextWordTest {
         int pos = 3;
         String textInput = "hello hello";
         String whatTextShouldBe = "hel hello";
-        String textOutput = new StringChangeNextWord().editNextWordToEmpty(pos, textInput);
+        String textOutput = StringChangeNextWord.editNextWordToEmpty(pos, textInput);
         assertEquals(textOutput, whatTextShouldBe);
     }
 
@@ -48,7 +47,7 @@ public class StringChangeNextWordTest {
         int pos = 5;
         String textInput = "hello person";
         String whatTextShouldBe = "person";
-        String textOutput = new StringChangeNextWord().editNextWordToEmpty(pos, textInput);
+        String textOutput = StringChangeNextWord.editNextWordToEmpty(pos, textInput);
         assertEquals(textOutput, whatTextShouldBe);
     }
 
@@ -57,7 +56,7 @@ public class StringChangeNextWordTest {
         int pos = 8;
         String textInput = "hello person";
         int whatNumOfSpaceShouldBe = 1;
-        int numOfSpace = new StringChangeNextWord().getNumOfSpace(pos, textInput);
+        int numOfSpace = StringChangeNextWord.getNumOfSpace(pos, textInput);
         assertEquals(numOfSpace, whatNumOfSpaceShouldBe);
     }
 
