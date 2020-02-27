@@ -130,12 +130,11 @@ public class StringChangeNextWord {
      * Get the overall string for making the next word empty.
      *
      * @param pos the position of the cursor
-     * @param numOfSpace the number of spaces from the beginning to the cursor
      * @param text string to analyze
      * @return String the result text
      */
     @Deprecated
-    public static String getNextWordEmpty(int pos, int numOfSpace, String text) {
+    public static String getNextWordEmpty(int pos, String text) {
         StringBuilder res = new StringBuilder();
         if (text.charAt(pos) == ' ') {
             boolean meetNextSpace = true;
@@ -153,7 +152,7 @@ public class StringChangeNextWord {
                             meetNextSpace = true;
                         }
                     }
-                    if (meetNumWord == 2) {
+                    if (meetNumWord >= 2) {
                         res.append(text.charAt(i));
                     }
                 }
@@ -198,7 +197,6 @@ public class StringChangeNextWord {
     @Deprecated
     public static String getPreviousWordEmpty(int numOfSpace, String[] splitText) {
         StringBuilder res = new StringBuilder();
-
         for (int i = 0; i < splitText.length; ++i) {
             if (i != numOfSpace) {
                 res.append(splitText[i]);
